@@ -38,4 +38,4 @@ The project is under development, so pay attention to the version for which this
 |Polina Ovsiannikova|Project manager|polina.ovsiannikova@aalto.fi|
 |Dubinin Viktor|Advisor|dubinin.victor@gmail.com| 
 |Muromsky Dmitry|Developer|gumgumich84095@gmail.com|
-|Kobzev Maxim|Developer|faggerezzz@gmail.com|
+|Kobzev Maksim|Developer|faggerezzz@gmail.com|
