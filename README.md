@@ -1,4 +1,4 @@
-# Fuctional Blocks Query Language Editor
+# Functional Blocks Query Language Editor
 For the program version 0.1
 
 # Download
