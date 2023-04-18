@@ -2,7 +2,7 @@
 For the program version 0.1
 
 # Download
-[FBQL Editor](https://github.com/FBQLEditor/FBQLEditor/raw/main/Executable/latest/FBQL%20Editor%20Setup.exe)
+[FBQL Editor (Windows 10 x64) - 18Mb](https://github.com/FBQLEditor/FBQLEditor/raw/main/Executable/latest/FBQL%20Editor%20Setup.exe)
 
 # Basic functionality
 The program is designed to facilitate the work of users with SPARQL queries:
