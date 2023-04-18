@@ -1,6 +1,9 @@
 # Fuctional Blocks Query Language Editor
 For the program version 0.1
 
+# Download
+[FBQL Editor](https://github.com/FBQLEditor/FBQLEditor/raw/main/Executable/latest/FBQL%20Editor%20Setup.exe)
+
 # Basic functionality
 The program is designed to facilitate the work of users with SPARQL queries:
 - [ ] In the program, you can create SPARQL queries using the SPARQL graphical editor.
@@ -27,7 +30,7 @@ The program is designed to facilitate the work of users with SPARQL queries:
 # The process of running the test
 
 # Project status
-The project is under development, so pay attention to the version for which this ReadMe file is relevant. To see further plans for improving the project, you can see in [file](https://github.com/GrumpyMonka/SPARQL_v2.0/blob/main/Tasks).
+The project is under development, so pay attention to the version for which this ReadMe file is relevant. To see further plans for improving the project, you can see in [file](https://github.com/FBQLEditor/FBQLEditor/blob/main/Tasks).
 
 # Contact information
 |Name|Contribution to the project|Email|
