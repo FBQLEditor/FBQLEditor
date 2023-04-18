@@ -1,4 +1,4 @@
-# Non-FunBlocks
+# Fuctional Blocks Query Language Editor
 For the program version 0.1
 
 # Basic functionality
