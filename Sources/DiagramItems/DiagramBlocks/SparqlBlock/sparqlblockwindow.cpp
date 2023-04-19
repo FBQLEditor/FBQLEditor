@@ -69,14 +69,13 @@ void SparqlBlockWindow::slotCustom()
         auto settings = getSettings();
         text_edit->setText( settings->getQuery() );
         delete settings;
-        getWidgetOnGraphicsView()->setGeometry( QRect( ( int )( width() / 2 - 600 ), ( int )( height() / 2 - 500 ), 1200, 1000 ) );
+        getWidgetOnGraphicsView()->setGeometry( QRect( (int)( width() / 2 - 600 ), (int)( height() / 2 - 500 ), 1200, 1000 ) );
         grid_widget->addWidget( text_edit, 0, 0 );
     }
     else if ( text_edit->isHidden() )
-
     {
         text_edit->show();
-        getWidgetOnGraphicsView()->setGeometry( QRect( ( int )( width() / 2 - 600 ), ( int )( height() / 2 - 500 ), 1200, 1000 ) );
+        getWidgetOnGraphicsView()->setGeometry( QRect( (int)( width() / 2 - 600 ), (int)( height() / 2 - 500 ), 1200, 1000 ) );
         auto settings = getSettings();
         text_edit->setText( settings->getQuery() );
         delete settings;
@@ -149,11 +148,6 @@ SparqlBlockSettings* SparqlBlockWindow::getSettings()
 {
     SparqlBlockSettings* settings = new SparqlBlockSettings();
     settings->block_name = line_name_block->text();
-    if ( nullptr != text_edit && text_edit->isVisible() )
-    {
-        settings->query = text_edit->toPlainText();
-        return settings;
-    }
 
     QMap<DiagramItemAtom*, QVector<DiagramItemAtom*>> blocks_area;
     DiagramItemAtom* start_area;

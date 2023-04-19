@@ -126,11 +126,6 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
 
 QString SparqlBlockSettings::getQuery()
 {
-    if ( !query.isEmpty() )
-    {
-        return query;
-    }
-
     QString request = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
                       "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
                       "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
@@ -185,7 +180,6 @@ QString SparqlBlockSettings::getQuery()
 
 QString SparqlBlockSettings::getScript()
 {
-
     QString script = "var xmlHttp = new XMLHttpRequest(network);\n"
                      "xmlHttp.setUrl(\"http://localhost:3030/nuclear/query\");\n"
                      "xmlHttp.open(\"POST\", \"/\");\n"
@@ -193,7 +187,7 @@ QString SparqlBlockSettings::getScript()
                      "xmlHttp.setRequestHeader(\"Accept\", \"application/sparql-results+json\");\n"
                      "var answer = xmlHttp.send(";
 
-    script = script + "\"query=" + QUrl::toPercentEncoding( getQuery() ) + "\");\ny.push(answer);";
+    script = script + "\"query=" + QUrl::toPercentEncoding( query.isEmpty() ? getQuery() : query ) + "\");\ny.push(answer);";
 
     return script;
 }
