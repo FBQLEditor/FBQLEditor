@@ -25,7 +25,7 @@ BlocksExec* DiagramExecutor::createBlocksExecObject( DiagramItemSettings* settin
 {
     BlocksExec* block_exec = new BlocksExec( this );
     block_exec->setValueForEngine(
-        { { "output", text_edit_output },
+        { { "log_output", text_edit_output },
             { "network", network_api } } );
     block_exec->setScript( settings->getScript() );
     block_exec->setSettings( settings );

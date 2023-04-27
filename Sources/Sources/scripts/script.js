@@ -1,16 +1,14 @@
-function log(data){
-    output.insertPlainText(data + "\n");
+function log(data) {
+    log_output.insertPlainText(data + "\n")
 }
 
-function clear(){
-	output.clear();
+function clear() {
+    log_output.clear()
 }
 
-function TOutput(){
-}
+function TOutput() {}
 
-TOutput.prototype.clear = clear;
-TOutput.prototype.log = log;
+TOutput.prototype.clear = clear
+TOutput.prototype.log = log
 
-var console = new TOutput();
-
+var console = new TOutput()

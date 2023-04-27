@@ -20,13 +20,22 @@ QWidget* SparqlBlockWindow::addCustomWidget()
     QGridLayout* grid_layout = new QGridLayout();
     widget->setLayout( grid_layout );
 
-    QLabel* label = new QLabel( "Name block:", this );
-    label->setMaximumHeight( 30 );
+    QLabel* label_name = new QLabel( "Name block:", this );
+    label_name->setMaximumHeight( 30 );
     line_name_block = new QLineEdit( this );
     line_name_block->setText( "Sparql" );
 
-    grid_layout->addWidget( label, 0, 0 );
+    QLabel* label_limit = new QLabel( "Limit:", this );
+    label_limit->setMaximumHeight( 30 );
+    spin_box_limit = new QSpinBox( this );
+    spin_box_limit->setMaximum( 1000 );
+    spin_box_limit->setMinimum( 0 );
+    spin_box_limit->setValue( 20 );
+
+    grid_layout->addWidget( label_name, 0, 0 );
     grid_layout->addWidget( line_name_block, 1, 0 );
+    grid_layout->addWidget( label_limit, 2, 0 );
+    grid_layout->addWidget( spin_box_limit, 3, 0 );
     widget->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ) );
 
     return widget;
@@ -69,13 +78,13 @@ void SparqlBlockWindow::slotCustom()
         auto settings = getSettings();
         text_edit->setText( settings->getQuery() );
         delete settings;
-        getWidgetOnGraphicsView()->setGeometry( QRect( (int)( width() / 2 - 600 ), (int)( height() / 2 - 500 ), 1200, 1000 ) );
+        getWidgetOnGraphicsView()->setGeometry( QRect( ( int )( width() / 2 - 600 ), ( int )( height() / 2 - 500 ), 1200, 1000 ) );
         grid_widget->addWidget( text_edit, 0, 0 );
     }
     else if ( text_edit->isHidden() )
     {
         text_edit->show();
-        getWidgetOnGraphicsView()->setGeometry( QRect( (int)( width() / 2 - 600 ), (int)( height() / 2 - 500 ), 1200, 1000 ) );
+        getWidgetOnGraphicsView()->setGeometry( QRect( ( int )( width() / 2 - 600 ), ( int )( height() / 2 - 500 ), 1200, 1000 ) );
         auto settings = getSettings();
         text_edit->setText( settings->getQuery() );
         delete settings;
@@ -140,6 +149,7 @@ void SparqlBlockWindow::setSettings( SparqlBlockSettings* settings )
             arrow->setText( line.text );
     }
 
+    spin_box_limit->setValue( settings->limit );
     line_name_block->setText( settings->block_name );
     delete settings;
 }
@@ -148,6 +158,7 @@ SparqlBlockSettings* SparqlBlockWindow::getSettings()
 {
     SparqlBlockSettings* settings = new SparqlBlockSettings();
     settings->block_name = line_name_block->text();
+    settings->limit = spin_box_limit->value();
 
     QMap<DiagramItemAtom*, QVector<DiagramItemAtom*>> blocks_area;
     DiagramItemAtom* start_area;

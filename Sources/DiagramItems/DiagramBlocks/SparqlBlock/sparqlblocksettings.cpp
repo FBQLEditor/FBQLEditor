@@ -187,7 +187,10 @@ QString SparqlBlockSettings::getScript()
                      "xmlHttp.setRequestHeader(\"Accept\", \"application/sparql-results+json\");\n"
                      "var answer = xmlHttp.send(";
 
-    script = script + "\"query=" + QUrl::toPercentEncoding( query.isEmpty() ? getQuery() : query ) + "\");\ny.push(answer);";
+    script += "\"query=" + QUrl::toPercentEncoding( query.isEmpty() ? getQuery() : query ) + "\");\n";
+    script += "json_obj = JSON.parse( answer );\n"
+              "array = json_obj.results.bindings;\n"
+              "y.push( array.length );";
 
     return script;
 }

@@ -1,6 +1,7 @@
 #ifndef SPARQLBLOCKWINDOW_H
 #define SPARQLBLOCKWINDOW_H
 
+#include <QSpinBox>
 #include <QTextEdit>
 
 #include <diagramitematom.h>
@@ -30,6 +31,7 @@ private:
     QWidget* addCustomBotWidget() override;
 
     QLineEdit* line_name_block;
+    QSpinBox* spin_box_limit;
     void createDefaultcScene();
     void clearScene();
     bool CheckCollisionArea( DiagramItemAtom* item, DiagramItemAtom* area );
