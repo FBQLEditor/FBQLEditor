@@ -62,11 +62,6 @@ void STabWidget::itemForAdd( DiagramItemSettings* settings )
 {
     ( static_cast<SGraphicsView*>( currentWidget() ) )->setItemForScene( settings );
 }
-void STabWidget::setSceneMode( int mode )
-{
-    if ( nullptr != currentWidget() )
-        ( static_cast<SGraphicsView*>( currentWidget() ) )->setSceneMode( mode );
-}
 
 QVector<DiagramItem*> STabWidget::getBlocksForRun()
 {

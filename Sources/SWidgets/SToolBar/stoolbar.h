@@ -26,7 +26,6 @@ private:
 
 signals:
     void onOpenFile();
-    void setNewDiagramSceneMode( int );
 
 private:
     QButtonGroup* pointer_type_group;

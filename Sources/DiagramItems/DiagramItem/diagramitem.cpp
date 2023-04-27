@@ -164,6 +164,7 @@ void DiagramItem::mousePressEvent( QGraphicsSceneMouseEvent* mouseEvent )
             QApplication::restoreOverrideCursor();
         }
     }
+    QGraphicsPolygonItem::mousePressEvent( mouseEvent );
 }
 
 void DiagramItem::contextMenuShow( QGraphicsSceneMouseEvent* mouseEvent )

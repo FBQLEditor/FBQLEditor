@@ -52,8 +52,6 @@ void MainWindow::createMainForm()
 
     tool_bar = new SToolBar( *menu_bar, this );
     addToolBar( Qt::TopToolBarArea, tool_bar );
-    connect( tool_bar, SIGNAL( setNewDiagramSceneMode( int ) ),
-        tab_widget, SLOT( setSceneMode( int ) ) );
 
     main_layout->addWidget( tool_box, 0, 0 );
     main_layout->addWidget( tab_widget, 0, 1 );

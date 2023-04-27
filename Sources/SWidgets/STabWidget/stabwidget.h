@@ -16,7 +16,6 @@ public:
     SWidget* currentSWidget();
 
 public slots:
-    void setSceneMode( int );
     void itemForAdd( DiagramItemSettings* );
     void resetBlocks();
     void deleteItemOnScene();
