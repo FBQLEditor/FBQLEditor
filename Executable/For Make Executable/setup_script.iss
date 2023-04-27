@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FBQL Editor"
-#define MyAppVersion "0.2"
+#define MyAppVersion "0.4"
 #define MyAppExeName "SPARQL.exe"
 
 [Setup]
@@ -16,9 +16,9 @@ DefaultDirName="C:\Program Files\FBQL Editor"
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir=C:\Users\GrumpyMonk\Documents\GitHub\SPARQL_v2.0\Output_For_Setup
-OutputBaseFilename=FBQL Editor 0.2 Setup
-SetupIconFile=C:\Users\GrumpyMonk\Documents\GitHub\SPARQL_v2.0\SPARQL\icon.ico
+OutputDir=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Executable\latest
+OutputBaseFilename=FBQL Editor Setup
+SetupIconFile=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Sources\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -31,8 +31,8 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\GrumpyMonk\Documents\GitHub\SPARQL_v2.0\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\GrumpyMonk\Documents\GitHub\SPARQL_v2.0\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
