@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include <QLabel>
 #include <QPixmap>
+#include <QProcess>
 #include <QScriptEngine>
 #include <QTextEdit>
 
@@ -47,6 +48,7 @@ private:
     QGraphicsView* graphics_view;
     SNetwork* network_api;
     ApiJS* api;
+    QProcess process;
 };
 
 #endif // DIAGRAMEXECUTOR_H

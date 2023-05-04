@@ -12,6 +12,12 @@
 #include <graphviz/cgraph.h>
 #include <graphviz/gvc.h>
 
+#ifdef Q_OS_LINUX
+#define FUSEKI_SERVER_PATH "Fuseki Server/fuseki-server"
+#else
+#define FUSEKI_SERVER_PATH "Fuseki Server/fuseki-server.bat"
+#endif
+
 DiagramExecutor::DiagramExecutor( QWidget* parent )
     : SWidget( parent )
 {
@@ -270,7 +276,6 @@ void DiagramExecutor::paint()
         }
     }
     text_format += "}";
-    text_edit_output->setText( text_format );
 
     GVC_t* gvc;
     gvc = gvContext();
@@ -339,6 +344,8 @@ void DiagramExecutor::logs_sniff( QStringList str_list )
 
 void DiagramExecutor::execute()
 {
+    QString command = QString( "./" ) + FUSEKI_SERVER_PATH;
+    process.start( command );
     text_edit_output->clear();
     while ( true )
     {
@@ -362,4 +369,5 @@ void DiagramExecutor::execute()
     QString output = text_edit_output->toPlainText();
     paint();
     text_edit_output->insertPlainText( output + "\n-------------------------------------------------------------------------------\n" );
+    process.terminate();
 }
