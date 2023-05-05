@@ -9,6 +9,7 @@
 #include <compositeblocksettings.h>
 #include <compositeblockwindow.h>
 #include <diagramexecutor.h>
+#include <fusekiserversetting.h>
 #include <ioblocksettings.h>
 #include <sparqlblockwindow.h>
 
@@ -127,4 +128,10 @@ void MainWindow::slotOnOpenProject()
 void MainWindow::slotOnSaveProject()
 {
     tab_widget->saveProject();
+}
+
+void MainWindow::slotOnSettingFusekiServer()
+{
+    auto window = new FusekiServerSetting( this );
+    tab_widget->addWidget( window, tr( "Fuseki" ) );
 }

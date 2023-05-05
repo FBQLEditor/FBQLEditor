@@ -13,9 +13,9 @@
 #include <graphviz/gvc.h>
 
 #ifdef Q_OS_LINUX
-#define FUSEKI_SERVER_PATH "Fuseki Server/fuseki-server"
+#define FUSEKI_SERVER_PATH "FusekiServer/fuseki-server"
 #else
-#define FUSEKI_SERVER_PATH "Fuseki Server/fuseki-server.bat"
+#define FUSEKI_SERVER_PATH "FusekiServer/fuseki-server.bat"
 #endif
 
 DiagramExecutor::DiagramExecutor( QWidget* parent )

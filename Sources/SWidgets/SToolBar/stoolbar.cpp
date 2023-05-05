@@ -26,6 +26,9 @@ void SToolBar::CreateToolBar( SMenuBar& menubar )
     addAction( menubar.sendBackAction );
     addAction( menubar.reworkBlockAction );
     addAction( menubar.runSceneScriptAction );
+
+    addSeparator();
+    addAction( menubar.settingFusekiServer );
 }
 
 void SToolBar::setSettings( Settings setting )

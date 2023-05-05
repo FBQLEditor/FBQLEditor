@@ -73,7 +73,14 @@ void SMenuBar::CreateActions()
     connect( runSceneScriptAction, SIGNAL( triggered() ),
         parent(), SLOT( slotOnClickedBlockExecutor() ) );
 
-    deleteAction = new QAction( QIcon( ":/Sources/images/delete.png" ), tr( "&Delete" ), this );
+    settingFusekiServer = new QAction( QIcon( ":/Sources/images/favicon.png" ), tr( "FusekiServer" ), this );
+    settingFusekiServer->setShortcut( tr( "Ctrl+F" ) );
+    settingFusekiServer->setStatusTip( tr( "Setting Fuseki Server" ) );
+    connect( settingFusekiServer, SIGNAL( triggered() ),
+        parent(), SLOT( slotOnSettingFusekiServer() ) );
+
+    deleteAction
+        = new QAction( QIcon( ":/Sources/images/delete.png" ), tr( "&Delete" ), this );
     deleteAction->setShortcut( tr( "Delete" ) );
     deleteAction->setStatusTip( tr( "Delete item from diagram" ) );
     connect( deleteAction, SIGNAL( triggered() ),
