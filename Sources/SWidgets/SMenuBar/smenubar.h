@@ -37,6 +37,8 @@ public:
     QAction* createNewProjectAction;
     QAction* openProjectAction;
     QAction* saveProjectAction;
+
+    QAction* settingFusekiServer;
 };
 
 #endif // SMENUBAR_H

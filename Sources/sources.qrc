@@ -36,5 +36,7 @@
         <file>Sources/images/chip.png</file>
         <file>Sources/images/icon.ico</file>
         <file>Sources/images/icon.png</file>
+        <file>Sources/images/favicon.ico</file>
+        <file>Sources/images/favicon.png</file>
     </qresource>
 </RCC>

@@ -31,8 +31,10 @@ SOURCES += \
     DiagramItems/DiagramItem/diagramitem.cpp \
     DiagramItems/DiagramItemSettings/diagramitemsettings.cpp \
     DiagramItems/DiagramScene/diagramscene.cpp \
+    DiagramItems/FusekiServerWindow/fusekiserversetting.cpp \
     DiagramItems/DiagramWindows/projectwindow.cpp \
     DiagramItems/DiagramWindows/projectwindowsettings.cpp \
+    DiagramItems/FusekiServerWindow/myprocess.cpp \
     SWidgets/SGraphicsView/sgraphicsview.cpp \
     SWidgets/STabWidget/stabwidget.cpp \
     SWidgets/SToolBar/stoolbar.cpp \
@@ -65,8 +67,11 @@ HEADERS += \
     DiagramItems/DiagramItem/diagramitem.h \
     DiagramItems/DiagramItemSettings/diagramitemsettings.h \
     DiagramItems/DiagramScene/diagramscene.h \
+    DiagramItems/FusekiServerWindow/fusekiserversetting.h \
     DiagramItems/DiagramWindows/projectwindow.h \
     DiagramItems/DiagramWindows/projectwindowsettings.h \
+    DiagramItems/FusekiServerWindow/myprocess.h \
+    MainForm/mainsettings.h \
     MainForm/mainwindow.h \
     SWidgets/SGraphicsView/sgraphicsview.h \
     SWidgets/STabWidget/stabwidget.h \
@@ -98,6 +103,7 @@ INCLUDEPATH += \
     DiagramItems/DiagramBlocks/IOBlock \
     DiagramItems/DiagramBlocks \
     DiagramItems/DiagramExecutor \
+    DiagramItems/FusekiServerWindow \
     "C:\Program Files\Graphviz\include" \
 
 # Default rules for deployment.

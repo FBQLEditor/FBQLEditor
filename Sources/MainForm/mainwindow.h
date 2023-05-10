@@ -7,6 +7,7 @@
 #include <QVector>
 
 #include <blockslibrary.h>
+#include <mainsettings.h>
 #include <smenubar.h>
 #include <stabwidget.h>
 #include <stoolbar.h>
@@ -38,6 +39,7 @@ public slots:
     void slotOnCreateBlock( DiagramItemSettings* );
     void slotOnClickedBlockExecutor();
     void slotOnDeleteItemOnScene();
+    void slotOnSettingFusekiServer();
     void setItemMenu( QMenu* );
 
 private:

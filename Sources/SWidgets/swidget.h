@@ -13,7 +13,8 @@ public:
     {
         SWidgetType,
         SGraphicsViewType,
-        BasedBlockWindowType
+        BasedBlockWindowType,
+        FusekiServerWindowType
     };
     virtual SWidgetTypes typeSWidget() { return SWidgetType; }
     virtual int modeDiagramBlocks() { return BlocksLibrary::ModeBlocks::None; }
