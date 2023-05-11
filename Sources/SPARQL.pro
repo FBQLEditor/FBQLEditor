@@ -31,6 +31,7 @@ SOURCES += \
     DiagramItems/DiagramItem/diagramitem.cpp \
     DiagramItems/DiagramItemSettings/diagramitemsettings.cpp \
     DiagramItems/DiagramScene/diagramscene.cpp \
+    DiagramItems/FusekiServerWindow/downloader.cpp \
     DiagramItems/FusekiServerWindow/fusekiserversetting.cpp \
     DiagramItems/DiagramWindows/projectwindow.cpp \
     DiagramItems/DiagramWindows/projectwindowsettings.cpp \
@@ -67,6 +68,7 @@ HEADERS += \
     DiagramItems/DiagramItem/diagramitem.h \
     DiagramItems/DiagramItemSettings/diagramitemsettings.h \
     DiagramItems/DiagramScene/diagramscene.h \
+    DiagramItems/FusekiServerWindow/downloader.h \
     DiagramItems/FusekiServerWindow/fusekiserversetting.h \
     DiagramItems/DiagramWindows/projectwindow.h \
     DiagramItems/DiagramWindows/projectwindowsettings.h \

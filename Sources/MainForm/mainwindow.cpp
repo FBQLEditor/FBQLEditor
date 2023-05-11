@@ -18,6 +18,7 @@ MainWindow::MainWindow( QWidget* parent )
     , ui( new Ui::MainWindow )
 {
     ui->setupUi( this );
+
     QCoreApplication::setApplicationName( tr( "FBQL Editor" ) );
     setWindowTitle( QCoreApplication::applicationName() );
 

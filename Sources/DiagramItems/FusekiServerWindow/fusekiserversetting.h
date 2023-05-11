@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QStandardItemModel>
 
+#include <downloader.h>
 #include <mainsettings.h>
 #include <myprocess.h>
 #include <swidget.h>
@@ -24,17 +25,19 @@ public:
 
 private slots:
     void startFuseki();
-    void testConnectToPage();
-    void setLinkPage();
     void openFuseki();
-    void testStart();
     void listAdd();
     void listRemove();
+    void downloadJava();
+    void saveSettings();
+    void closeWindow();
+    void testSettings();
 
 signals:
     void ERROR( QString );
     void runCommand( QString );
     void stopCommand();
+    void startDownload( QStringList );
 
 private:
     QPushButton* button_start;
@@ -44,6 +47,7 @@ private:
 
     MyProcess* process;
     bool flag_started = false;
+    MainSettingsMaster master;
 };
 
 #endif // FUSEKISERVERSETTING_H
