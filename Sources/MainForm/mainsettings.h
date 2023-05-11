@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QMap>
 #include <QVariant>
+#include <QStandardPaths>
 
 #define SETTINGS_PATH "configuration.set"
 
@@ -13,9 +14,14 @@ class MainSettingsMaster
 {
 private:
     QMap<QString, QVariant> settings;
+    QString path_to_file;
 
 public:
-    MainSettingsMaster() { loadSettings(); };
+    MainSettingsMaster()
+    {
+        path_to_file = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + SETTINGS_PATH;
+        loadSettings();
+    };
 
     template <typename T>
     void setSetting( const QString& tag, const T& data )
@@ -39,7 +45,7 @@ public:
 private:
     void saveSettings()
     {
-        QFile file( SETTINGS_PATH );
+        QFile file( path_to_file );
         QDataStream stream( &file );
 
         if ( file.open( QIODevice::WriteOnly ) )
@@ -53,9 +59,9 @@ private:
         file.close();
     }
 
-    QMap<QString, QVariant> loadSettings()
+    void loadSettings()
     {
-        QFile file( SETTINGS_PATH );
+        QFile file( path_to_file );
         QDataStream stream( &file );
         if ( file.open( QIODevice::ReadOnly ) )
         {
@@ -66,7 +72,6 @@ private:
             qDebug() << "Error load settings";
         }
         file.close();
-        return settings;
     }
 };
 

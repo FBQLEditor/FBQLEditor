@@ -40,9 +40,11 @@ signals:
     void startDownload( QStringList );
 
 private:
+    QString path_to_fuseki;
+
     QPushButton* button_start;
     QLineEdit* line_edit_link;
-    QListView* list_view_prefixs;
+    QListView* list_view_prefixes;
     QStandardItemModel* model;
 
     MyProcess* process;

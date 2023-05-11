@@ -5,11 +5,12 @@
 #include <QPushButton>
 #include <QSpacerItem>
 #include <QVBoxLayout>
+#include <QDir>
 
 #ifdef Q_OS_LINUX
 #define FUSEKI_SERVER_PATH "./FusekiServer/fuseki-server"
 #else
-#define FUSEKI_SERVER_PATH "FusekiServer/fuseki-server.bat"
+#define FUSEKI_SERVER_PATH "/FusekiServer/fuseki-server.bat"
 #endif
 
 FusekiServerSetting::FusekiServerSetting( QWidget* parent )
@@ -17,12 +18,14 @@ FusekiServerSetting::FusekiServerSetting( QWidget* parent )
 {
     createWidget();
 
+    path_to_fuseki = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + FUSEKI_SERVER_PATH;
+
     process = new MyProcess( this );
     connect( this, SIGNAL( runCommand( QString ) ), process, SLOT( runCommand( QString ) ) );
     connect( this, SIGNAL( stopCommand() ), process, SLOT( stopCommand() ) );
 
     line_edit_link->setText( master.getSettings<QString>( "SPARQL_dataset_name" ) );
-    auto str_list = master.getSettings<QStringList>( "SPARQL_prefixs" );
+    auto str_list = master.getSettings<QStringList>( "SPARQL_prefixes" );
     for ( auto str : str_list )
     {
         model->appendRow( new QStandardItem( str ) );
@@ -32,6 +35,7 @@ FusekiServerSetting::FusekiServerSetting( QWidget* parent )
 FusekiServerSetting::~FusekiServerSetting()
 {
     emit stopCommand();
+    process->terminate();
 }
 
 void FusekiServerSetting::createWidget()
@@ -43,11 +47,11 @@ void FusekiServerSetting::createWidget()
     QLabel* link_label = new QLabel( "Dataset Name: ", this );
     link_label->setMaximumHeight( 30 );
     line_edit_link = new QLineEdit( this );
-    QLabel* label_prefixs = new QLabel( "Prefixs:", this );
+    QLabel* label_prefixes = new QLabel( "Prefixes:", this );
 
-    list_view_prefixs = new QListView( this );
+    list_view_prefixes = new QListView( this );
     model = new QStandardItemModel();
-    list_view_prefixs->setModel( model );
+    list_view_prefixes->setModel( model );
 
     QPushButton* button_list_add = new QPushButton( "Add Row", this );
     QPushButton* button_list_remove = new QPushButton( "Remove Row", this );
@@ -60,12 +64,12 @@ void FusekiServerSetting::createWidget()
     button_open_page->setMaximumWidth( 500 );
     link_label->setMaximumWidth( 500 );
     line_edit_link->setMaximumWidth( 500 );
-    label_prefixs->setMaximumWidth( 500 );
-    label_prefixs->setMaximumHeight( 30 );
+    label_prefixes->setMaximumWidth( 500 );
+    label_prefixes->setMaximumHeight( 30 );
 
-    list_view_prefixs->setMaximumWidth( 500 );
-    list_view_prefixs->setMinimumHeight( 400 );
-    list_view_prefixs->setMaximumHeight( 400 );
+    list_view_prefixes->setMaximumWidth( 500 );
+    list_view_prefixes->setMinimumHeight( 400 );
+    list_view_prefixes->setMaximumHeight( 400 );
 
     button_list_add->setMaximumWidth( 240 );
     button_list_remove->setMaximumWidth( 240 );
@@ -90,8 +94,8 @@ void FusekiServerSetting::createWidget()
     gridLayout->addWidget( button_open_page, 6, 3, 1, 2 );
     gridLayout->addWidget( link_label, 7, 3, 1, 2 );
     gridLayout->addWidget( line_edit_link, 8, 3, 1, 2 );
-    gridLayout->addWidget( label_prefixs, 10, 3, 1, 2 );
-    gridLayout->addWidget( list_view_prefixs, 11, 3, 1, 2 );
+    gridLayout->addWidget( label_prefixes, 10, 3, 1, 2 );
+    gridLayout->addWidget( list_view_prefixes, 11, 3, 1, 2 );
     gridLayout->addWidget( button_list_add, 12, 3, 1, 1 );
     gridLayout->addWidget( button_list_remove, 12, 4, 1, 1 );
     gridLayout->addWidget( new QLabel( this ), 13, 3, 1, 3 );
@@ -108,19 +112,19 @@ void FusekiServerSetting::listAdd()
 
 void FusekiServerSetting::listRemove()
 {
-    model->removeRow( list_view_prefixs->currentIndex().row() );
+    model->removeRow( list_view_prefixes->currentIndex().row() );
 }
 
 void FusekiServerSetting::startFuseki()
 {
     if ( flag_started )
     {
-        emit stopCommand();
+        QProcess::execute( "taskkill /im javaw.exe" );
         button_start->setText( "Start Fuseki Server" );
     }
     else
     {
-        emit runCommand( QString( FUSEKI_SERVER_PATH ) );
+        emit runCommand( QString( "\"" ) + QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +"\\FusekiServer\\fuseki-server.bat\"" );
         button_start->setText( "Stop Fuseki Server" );
     }
     flag_started = !flag_started;
@@ -144,7 +148,7 @@ void FusekiServerSetting::saveSettings()
     {
         str_list << model->item( i )->text();
     }
-    master.setSetting( "SPARQL_prefixs", str_list );
+    master.setSetting( "SPARQL_prefixes", str_list );
 }
 
 void FusekiServerSetting::closeWindow()

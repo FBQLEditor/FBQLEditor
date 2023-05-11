@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FBQL Editor"
-#define MyAppVersion "0.4"
+#define MyAppVersion "0.5"
 #define MyAppExeName "SPARQL.exe"
 
 [Setup]
@@ -33,6 +33,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\FusekiServer\*";  DestDir: "{userappdata}\FBQL Editor\FusekiServer"; Flags: ignoreversion createallsubdirs recursesubdirs comparetimestamp
+Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\configuration.set";  DestDir: "{userappdata}\FBQL Editor\"; Flags: ignoreversion createallsubdirs comparetimestamp
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

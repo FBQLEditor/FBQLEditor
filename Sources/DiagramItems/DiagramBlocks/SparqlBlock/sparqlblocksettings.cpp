@@ -127,8 +127,8 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
 QString SparqlBlockSettings::getQuery()
 {
     QString request;
-    auto prefixs = master.getSettings<QStringList>( "SPARQL_prefixs" );
-    for ( auto& prefix : prefixs )
+    auto prefixes = master.getSettings<QStringList>( "SPARQL_prefixes" );
+    for ( auto& prefix : prefixes )
     {
         request += prefix + "\n";
     }
