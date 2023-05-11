@@ -3,6 +3,7 @@
 
 #include <atomblocksettings.h>
 #include <basedblocksettings.h>
+#include <mainsettings.h>
 
 class SparqlBlockSettings : public DiagramItemSettings
 {
@@ -44,6 +45,9 @@ public:
     QString getQuery();
 
     static SparqlBlockSettings* CreateTemplateSparqlSettings();
+
+private:
+    MainSettingsMaster master;
 };
 
 #endif // SPARQLBLOCKSETTINGS_H

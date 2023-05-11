@@ -18,8 +18,10 @@ MainWindow::MainWindow( QWidget* parent )
     , ui( new Ui::MainWindow )
 {
     ui->setupUi( this );
+
     QCoreApplication::setApplicationName( tr( "FBQL Editor" ) );
     setWindowTitle( QCoreApplication::applicationName() );
+    QDir().mkdir( QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) );
 
     library = new BlocksLibrary();
     library->loadBlocksFromFiles( FOLDER_FOR_BLOCKS );

@@ -22,4 +22,6 @@ void MyProcess::runCommand( QString cmd )
 void MyProcess::stopCommand()
 {
     process.terminate();
+    process.kill();
 }
+

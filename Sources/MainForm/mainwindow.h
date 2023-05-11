@@ -7,7 +7,6 @@
 #include <QVector>
 
 #include <blockslibrary.h>
-#include <mainsettings.h>
 #include <smenubar.h>
 #include <stabwidget.h>
 #include <stoolbar.h>

@@ -126,13 +126,13 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
 
 QString SparqlBlockSettings::getQuery()
 {
-    QString request = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n"
-                      "PREFIX owl: <http://www.w3.org/2002/07/owl#>\n"
-                      "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n"
-                      "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n"
-                      "PREFIX : <http://www.semanticweb.org/SEARCH/ontologies/2021/4/OICA_project#>\n"
-                      "PREFIX USEPR: <http://www.semanticweb.org/SEARCH/ontologies/2021/4/OICA/USEPR#>\n\n"
-                      "SELECT *";
+    QString request;
+    auto prefixes = master.getSettings<QStringList>( "SPARQL_prefixes" );
+    for ( auto& prefix : prefixes )
+    {
+        request += prefix + "\n";
+    }
+    request += "\nSELECT *";
 
     QString body = "";
     QMap<int, QString> stack = { { start_area, "" } };
@@ -180,12 +180,19 @@ QString SparqlBlockSettings::getQuery()
 
 QString SparqlBlockSettings::getScript()
 {
+    auto dataset_name = master.getSettings<QString>( "SPARQL_dataset_name" );
+    if ( dataset_name.isEmpty() )
+    {
+        qDebug() << "Dataset is Empty";
+    }
+
     QString script = "var xmlHttp = new XMLHttpRequest(network);\n"
-                     "xmlHttp.setUrl(\"http://localhost:3030/nuclear/query\");\n"
-                     "xmlHttp.open(\"POST\", \"/\");\n"
-                     "xmlHttp.setRequestHeader(\"Connection\", \"keep-alive\");\n"
-                     "xmlHttp.setRequestHeader(\"Accept\", \"application/sparql-results+json\");\n"
-                     "var answer = xmlHttp.send(";
+                     "xmlHttp.setUrl(\"http://localhost:3030/"
+        + dataset_name + "/query\");\n"
+                         "xmlHttp.open(\"POST\", \"/\");\n"
+                         "xmlHttp.setRequestHeader(\"Connection\", \"keep-alive\");\n"
+                         "xmlHttp.setRequestHeader(\"Accept\", \"application/sparql-results+json\");\n"
+                         "var answer = xmlHttp.send(";
 
     script += "\"query=" + QUrl::toPercentEncoding( query.isEmpty() ? getQuery() : query ) + "\");\n";
     script += "json_obj = JSON.parse( answer );\n"
