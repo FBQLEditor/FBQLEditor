@@ -14,6 +14,7 @@ void STabWidget::addWidget( SWidget* widget, const QString& name )
     addTab( widget, name );
     setCurrentWidget( widget );
     connect( widget, SIGNAL( setTabName( QString ) ), this, SLOT( setTabName( QString ) ) );
+    connect( widget, SIGNAL( signalCloseWidget() ), this, SLOT( slotOnSignalCloseWidget() ) );
 }
 
 void STabWidget::setTabName( QString name )
@@ -50,6 +51,11 @@ void STabWidget::slotCurrentTab( int index )
         return;
     int mode = widget_lib[widget( index )];
     emit newCurrentMode( mode );
+}
+
+void STabWidget::slotOnSignalCloseWidget()
+{
+    tabClose( indexOf( static_cast<QWidget*>( sender() ) ) );
 }
 
 void STabWidget::tabClose( int index )

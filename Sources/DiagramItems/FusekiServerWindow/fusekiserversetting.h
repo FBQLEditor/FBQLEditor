@@ -7,9 +7,7 @@
 #include <QPushButton>
 #include <QStandardItemModel>
 
-#include <downloader.h>
 #include <mainsettings.h>
-#include <myprocess.h>
 #include <swidget.h>
 
 class FusekiServerSetting : public SWidget
@@ -19,36 +17,28 @@ public:
     SWidgetTypes typeSWidget() override { return FusekiServerWindowType; }
 
     explicit FusekiServerSetting( QWidget* parent = nullptr );
-    ~FusekiServerSetting();
-
-    void createWidget();
 
 private slots:
-    void startFuseki();
-    void openFuseki();
     void listAdd();
     void listRemove();
-    void downloadJava();
     void saveSettings();
     void closeWindow();
     void testSettings();
 
 signals:
     void ERROR( QString );
-    void runCommand( QString );
-    void stopCommand();
-    void startDownload( QStringList );
 
 private:
-    QString path_to_fuseki;
+    void createWidget();
+    void loadSettings();
 
-    QPushButton* button_start;
+private:
     QLineEdit* line_edit_link;
     QListView* list_view_prefixes;
+    QLineEdit* line_ip_fuseki;
+    QLineEdit* line_port_fuseki;
     QStandardItemModel* model;
 
-    MyProcess* process;
-    bool flag_started = false;
     MainSettingsMaster master;
 };
 

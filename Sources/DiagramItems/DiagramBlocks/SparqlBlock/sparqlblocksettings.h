@@ -45,9 +45,6 @@ public:
     QString getQuery();
 
     static SparqlBlockSettings* CreateTemplateSparqlSettings();
-
-private:
-    MainSettingsMaster master;
 };
 
 #endif // SPARQLBLOCKSETTINGS_H

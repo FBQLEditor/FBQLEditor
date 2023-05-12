@@ -25,6 +25,7 @@ public:
 
 signals:
     void setTabName( QString );
+    void signalCloseWidget();
     void ERROR( QString );
 };
 

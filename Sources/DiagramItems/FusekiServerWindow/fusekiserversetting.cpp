@@ -1,48 +1,26 @@
 #include "fusekiserversetting.h"
 
 #include <QDesktopServices>
+#include <QDir>
 #include <QGridLayout>
+#include <QIntValidator>
 #include <QPushButton>
 #include <QSpacerItem>
 #include <QVBoxLayout>
-#include <QDir>
-
-#ifdef Q_OS_LINUX
-#define FUSEKI_SERVER_PATH "./FusekiServer/fuseki-server"
-#else
-#define FUSEKI_SERVER_PATH "/FusekiServer/fuseki-server.bat"
-#endif
 
 FusekiServerSetting::FusekiServerSetting( QWidget* parent )
     : SWidget( parent )
 {
     createWidget();
-
-    path_to_fuseki = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + FUSEKI_SERVER_PATH;
-
-    process = new MyProcess( this );
-    connect( this, SIGNAL( runCommand( QString ) ), process, SLOT( runCommand( QString ) ) );
-    connect( this, SIGNAL( stopCommand() ), process, SLOT( stopCommand() ) );
-
-    line_edit_link->setText( master.getSettings<QString>( "SPARQL_dataset_name" ) );
-    auto str_list = master.getSettings<QStringList>( "SPARQL_prefixes" );
-    for ( auto str : str_list )
-    {
-        model->appendRow( new QStandardItem( str ) );
-    }
-}
-
-FusekiServerSetting::~FusekiServerSetting()
-{
-    emit stopCommand();
-    process->terminate();
 }
 
 void FusekiServerSetting::createWidget()
 {
-    QPushButton* button_download_java = new QPushButton( "Download Java Installer", this );
-    button_start = new QPushButton( "Start Fuseki Server", this );
-    QPushButton* button_open_page = new QPushButton( "Open Fuseki Server", this );
+    QLabel* label_ip_fuseki = new QLabel( "IP-adress Fuseki Server:", this );
+    line_ip_fuseki = new QLineEdit( this );
+    QLabel* label_port_fuseki = new QLabel( "Port Fuseki Server:", this );
+    line_port_fuseki = new QLineEdit( this );
+    line_port_fuseki->setValidator( new QIntValidator( 1024, 65535, this ) );
 
     QLabel* link_label = new QLabel( "Dataset Name: ", this );
     link_label->setMaximumHeight( 30 );
@@ -59,9 +37,10 @@ void FusekiServerSetting::createWidget()
     QPushButton* button_close_window = new QPushButton( "Close", this );
     QPushButton* button_test_settings = new QPushButton( "Test Settings", this );
 
-    button_download_java->setMaximumWidth( 500 );
-    button_start->setMaximumWidth( 500 );
-    button_open_page->setMaximumWidth( 500 );
+    label_ip_fuseki->setMaximumWidth( 500 );
+    label_port_fuseki->setMaximumWidth( 500 );
+    line_ip_fuseki->setMaximumWidth( 500 );
+    line_port_fuseki->setMaximumWidth( 500 );
     link_label->setMaximumWidth( 500 );
     line_edit_link->setMaximumWidth( 500 );
     label_prefixes->setMaximumWidth( 500 );
@@ -77,9 +56,6 @@ void FusekiServerSetting::createWidget()
     button_save_settings->setMaximumWidth( 240 );
     button_close_window->setMaximumWidth( 240 );
 
-    connect( button_download_java, SIGNAL( clicked() ), this, SLOT( downloadJava() ) );
-    connect( button_start, SIGNAL( clicked() ), this, SLOT( startFuseki() ) );
-    connect( button_open_page, SIGNAL( clicked() ), this, SLOT( openFuseki() ) );
     connect( button_list_add, SIGNAL( clicked() ), this, SLOT( listAdd() ) );
     connect( button_list_remove, SIGNAL( clicked() ), this, SLOT( listRemove() ) );
     connect( button_save_settings, SIGNAL( clicked() ), this, SLOT( saveSettings() ) );
@@ -89,11 +65,12 @@ void FusekiServerSetting::createWidget()
     QGridLayout* gridLayout = new QGridLayout( this );
     gridLayout->addWidget( new QLabel( this ), 3, 0, 1, 1 );
     gridLayout->addWidget( new QLabel( this ), 3, 3, 1, 2 );
-    gridLayout->addWidget( button_download_java, 4, 3, 1, 2 );
-    gridLayout->addWidget( button_start, 5, 3, 1, 2 );
-    gridLayout->addWidget( button_open_page, 6, 3, 1, 2 );
-    gridLayout->addWidget( link_label, 7, 3, 1, 2 );
-    gridLayout->addWidget( line_edit_link, 8, 3, 1, 2 );
+    gridLayout->addWidget( label_ip_fuseki, 4, 3, 1, 2 );
+    gridLayout->addWidget( line_ip_fuseki, 5, 3, 1, 2 );
+    gridLayout->addWidget( label_port_fuseki, 6, 3, 1, 2 );
+    gridLayout->addWidget( line_port_fuseki, 7, 3, 1, 2 );
+    gridLayout->addWidget( link_label, 8, 3, 1, 2 );
+    gridLayout->addWidget( line_edit_link, 9, 3, 1, 2 );
     gridLayout->addWidget( label_prefixes, 10, 3, 1, 2 );
     gridLayout->addWidget( list_view_prefixes, 11, 3, 1, 2 );
     gridLayout->addWidget( button_list_add, 12, 3, 1, 1 );
@@ -103,6 +80,18 @@ void FusekiServerSetting::createWidget()
     gridLayout->addWidget( button_test_settings, 14, 3, 1, 2 );
     gridLayout->addWidget( button_save_settings, 15, 3, 1, 1 );
     gridLayout->addWidget( button_close_window, 15, 4, 1, 1 );
+}
+
+void FusekiServerSetting::loadSettings()
+{
+    line_edit_link->setText( master.getSettings<QString>( "SPARQL_dataset_name" ) );
+    auto str_list = master.getSettings<QStringList>( "SPARQL_prefixes" );
+    for ( auto str : str_list )
+    {
+        model->appendRow( new QStandardItem( str ) );
+    }
+    line_ip_fuseki->setText( master.getSettings<QString>( "SPARQL_fuseki_ip" ) );
+    line_port_fuseki->setText( master.getSettings<QString>( "SPARQL_fuseki_port" ) );
 }
 
 void FusekiServerSetting::listAdd()
@@ -115,31 +104,6 @@ void FusekiServerSetting::listRemove()
     model->removeRow( list_view_prefixes->currentIndex().row() );
 }
 
-void FusekiServerSetting::startFuseki()
-{
-    if ( flag_started )
-    {
-        QProcess::execute( "taskkill /im javaw.exe" );
-        button_start->setText( "Start Fuseki Server" );
-    }
-    else
-    {
-        emit runCommand( QString( "\"" ) + QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) +"\\FusekiServer\\fuseki-server.bat\"" );
-        button_start->setText( "Stop Fuseki Server" );
-    }
-    flag_started = !flag_started;
-}
-
-void FusekiServerSetting::openFuseki()
-{
-    QDesktopServices::openUrl( QUrl( "http://localhost:3030" ) );
-}
-
-void FusekiServerSetting::downloadJava()
-{
-    QDesktopServices::openUrl( QUrl( "https://drive.google.com/u/0/uc?id=1G1dmRDCt4KDhZaNySOUl6lJqtTf6G3Tl&export=download&confirm=t&uuid=8ed1d411-023f-4456-bed5-6e22f7761fee&at=AKKF8vzTcWqxFKHUZ2X-OtQGN7lX:1683796000413 " ) );
-}
-
 void FusekiServerSetting::saveSettings()
 {
     master.setSetting( "SPARQL_dataset_name", line_edit_link->text() );
@@ -149,10 +113,13 @@ void FusekiServerSetting::saveSettings()
         str_list << model->item( i )->text();
     }
     master.setSetting( "SPARQL_prefixes", str_list );
+    master.setSetting( "SPARQL_fuseki_ip", line_ip_fuseki->text() );
+    master.setSetting( "SPARQL_server_port", line_port_fuseki->text() );
 }
 
 void FusekiServerSetting::closeWindow()
 {
+    emit signalCloseWidget();
 }
 
 void FusekiServerSetting::testSettings()
