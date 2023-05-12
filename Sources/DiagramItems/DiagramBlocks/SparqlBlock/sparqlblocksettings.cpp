@@ -127,8 +127,8 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
 QString SparqlBlockSettings::getQuery()
 {
     QString request;
-    MainSettingsMaster master;
-    auto prefixes = master.getSettings<QStringList>( "SPARQL_prefixes" );
+    MainSettingsMaster master( "SPARQL" );
+    auto prefixes = master.getSettings<QStringList>( "prefixes" );
     for ( auto& prefix : prefixes )
     {
         request += prefix + "\n";
@@ -181,10 +181,10 @@ QString SparqlBlockSettings::getQuery()
 
 QString SparqlBlockSettings::getScript()
 {
-    MainSettingsMaster master;
-    auto dataset_name = master.getSettings<QString>( "SPARQL_dataset_name" );
-    auto fuseki_ip = master.getSettings<QString>( "SPARQL_fuseki_ip" );
-    auto fuseki_port = master.getSettings<QString>( "SPARQL_fuseki_port" );
+    MainSettingsMaster master( "Fuseki" );
+    auto dataset_name = master.getSettings<QString>( "dataset_name" );
+    auto fuseki_ip = master.getSettings<QString>( "fuseki_ip" );
+    auto fuseki_port = master.getSettings<QString>( "fuseki_port" );
 
     if ( dataset_name.isEmpty() )
     {

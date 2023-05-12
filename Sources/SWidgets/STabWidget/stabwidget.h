@@ -28,7 +28,7 @@ private:
     void createTabWidgets();
 
 private slots:
-    void slotOnSignalCloseWindget();
+    void slotOnSignalCloseWidget();
     void tabClose( int );
     void slotCurrentTab( int );
 

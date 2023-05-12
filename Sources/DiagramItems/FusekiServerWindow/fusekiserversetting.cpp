@@ -84,14 +84,15 @@ void FusekiServerSetting::createWidget()
 
 void FusekiServerSetting::loadSettings()
 {
-    line_edit_link->setText( master.getSettings<QString>( "SPARQL_dataset_name" ) );
-    auto str_list = master.getSettings<QStringList>( "SPARQL_prefixes" );
+    MainSettingsMaster master( "Fuseki" );
+    line_edit_link->setText( master.getSettings<QString>( "dataset_name" ) );
+    auto str_list = master.getSettings<QStringList>( "SPARQL", "prefixes" );
     for ( auto str : str_list )
     {
         model->appendRow( new QStandardItem( str ) );
     }
-    line_ip_fuseki->setText( master.getSettings<QString>( "SPARQL_fuseki_ip" ) );
-    line_port_fuseki->setText( master.getSettings<QString>( "SPARQL_fuseki_port" ) );
+    line_ip_fuseki->setText( master.getSettings<QString>( "ip" ) );
+    line_port_fuseki->setText( master.getSettings<QString>( "port" ) );
 }
 
 void FusekiServerSetting::listAdd()
@@ -106,15 +107,16 @@ void FusekiServerSetting::listRemove()
 
 void FusekiServerSetting::saveSettings()
 {
-    master.setSetting( "SPARQL_dataset_name", line_edit_link->text() );
+    MainSettingsMaster master( "Fuseki" );
+    master.setSetting( "dataset_name", line_edit_link->text() );
     QStringList str_list;
     for ( int i = 0; i < model->rowCount(); ++i )
     {
         str_list << model->item( i )->text();
     }
-    master.setSetting( "SPARQL_prefixes", str_list );
-    master.setSetting( "SPARQL_fuseki_ip", line_ip_fuseki->text() );
-    master.setSetting( "SPARQL_server_port", line_port_fuseki->text() );
+    master.setSetting( "SPARQL", "prefixes", str_list );
+    master.setSetting( "ip", line_ip_fuseki->text() );
+    master.setSetting( "port", line_port_fuseki->text() );
 }
 
 void FusekiServerSetting::closeWindow()

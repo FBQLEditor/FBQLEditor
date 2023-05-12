@@ -38,8 +38,6 @@ private:
     QLineEdit* line_ip_fuseki;
     QLineEdit* line_port_fuseki;
     QStandardItemModel* model;
-
-    MainSettingsMaster master;
 };
 
 #endif // FUSEKISERVERSETTING_H
