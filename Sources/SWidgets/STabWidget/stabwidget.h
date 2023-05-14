@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QTabWidget>
+
 #include <sgraphicsview.h>
 
 class STabWidget : public QTabWidget
@@ -27,6 +28,7 @@ private:
     void createTabWidgets();
 
 private slots:
+    void slotOnSignalCloseWidget();
     void tabClose( int );
     void slotCurrentTab( int );
 

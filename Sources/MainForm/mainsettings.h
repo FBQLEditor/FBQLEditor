@@ -5,39 +5,57 @@
 #include <QDebug>
 #include <QFile>
 #include <QMap>
-#include <QVariant>
 #include <QStandardPaths>
+#include <QVariant>
 
-#define SETTINGS_PATH "configuration.set"
+#define SETTINGS_PATH "FBQL Settings.fbs"
 
 class MainSettingsMaster
 {
 private:
-    QMap<QString, QVariant> settings;
+    QMap<QString, QMap<QString, QVariant>> settings;
     QString path_to_file;
+    QString data_context;
 
 public:
-    MainSettingsMaster()
+    MainSettingsMaster( const QString& context )
     {
-        path_to_file = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + "/" + SETTINGS_PATH;
+        data_context = context;
+        path_to_file = QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) + "/" + SETTINGS_PATH;
         loadSettings();
     };
 
     template <typename T>
     void setSetting( const QString& tag, const T& data )
     {
-        settings.insert( tag, data );
+        setSetting( data_context, tag, data );
+    }
+
+    template <typename T>
+    void setSetting( const QString& context, const QString& tag, const T& data )
+    {
+        settings[context][tag] = data;
         saveSettings();
     }
 
     template <typename T>
     T getSettings( const QString& tag )
     {
+        return getSettings<T>( data_context, tag );
+    }
+
+    template <typename T>
+    T getSettings( const QString& context, const QString& tag )
+    {
         loadSettings();
-        auto it = settings.find( tag );
-        if ( settings.end() != it )
+        auto it_context = settings.find( context );
+        if ( settings.end() != it_context )
         {
-            return it->value<T>();
+            auto it_tag = it_context->find( tag );
+            if ( it_context->end() != it_tag )
+            {
+                return it_tag->value<T>();
+            }
         }
         return {};
     }

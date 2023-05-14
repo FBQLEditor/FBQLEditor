@@ -127,7 +127,8 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
 QString SparqlBlockSettings::getQuery()
 {
     QString request;
-    auto prefixes = master.getSettings<QStringList>( "SPARQL_prefixes" );
+    MainSettingsMaster master( "SPARQL" );
+    auto prefixes = master.getSettings<QStringList>( "prefixes" );
     for ( auto& prefix : prefixes )
     {
         request += prefix + "\n";
@@ -180,14 +181,20 @@ QString SparqlBlockSettings::getQuery()
 
 QString SparqlBlockSettings::getScript()
 {
-    auto dataset_name = master.getSettings<QString>( "SPARQL_dataset_name" );
+    MainSettingsMaster master( "Fuseki" );
+    auto dataset_name = master.getSettings<QString>( "dataset_name" );
+    auto fuseki_ip = master.getSettings<QString>( "fuseki_ip" );
+    auto fuseki_port = master.getSettings<QString>( "fuseki_port" );
+
     if ( dataset_name.isEmpty() )
     {
         qDebug() << "Dataset is Empty";
     }
 
     QString script = "var xmlHttp = new XMLHttpRequest(network);\n"
-                     "xmlHttp.setUrl(\"http://localhost:3030/"
+                     "xmlHttp.setUrl(\"http://"
+        + fuseki_ip + ":"
+        + fuseki_port + "/"
         + dataset_name + "/query\");\n"
                          "xmlHttp.open(\"POST\", \"/\");\n"
                          "xmlHttp.setRequestHeader(\"Connection\", \"keep-alive\");\n"
