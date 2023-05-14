@@ -12,6 +12,7 @@ FusekiServerSetting::FusekiServerSetting( QWidget* parent )
     : SWidget( parent )
 {
     createWidget();
+    loadSettings();
 }
 
 void FusekiServerSetting::createWidget()
