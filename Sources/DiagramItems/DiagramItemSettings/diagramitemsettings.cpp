@@ -11,7 +11,7 @@ namespace
 {
 QMap<DiagramItemSettings::FileFormat, QString> file_format_converter = {
     { DiagramItemSettings::ProjectFileFormat, "FBD (*.fbd)" },
-    { DiagramItemSettings::BlockFileFormat, "*.fbql" },
+    { DiagramItemSettings::BlockFileFormat, "FBQL (*.fbql)" },
     { DiagramItemSettings::MainSettingsFileFormat, "FBS (*.fbs)" }
 };
 }

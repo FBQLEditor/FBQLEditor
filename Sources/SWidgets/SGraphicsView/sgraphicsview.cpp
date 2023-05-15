@@ -76,13 +76,15 @@ QString SGraphicsView::openFile( const QString& format )
 
 void SGraphicsView::saveFile( const QString& text, const QString& format )
 {
-    QFileDialog file_dialog( this, "Save as" );
-    file_dialog.setNameFilter( format );
-    file_dialog.setDefaultSuffix( format );
-    file_dialog.setAcceptMode( QFileDialog::AcceptSave );
-    file_dialog.exec();
+    QString selected_format;
+    QString file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), format, &selected_format );
+    QStringList list = file_name.split( "." );
 
-    QFile file( file_dialog.selectedFiles().first() );
+    if ( list.size() == 1 || list.back() != "json" )
+    {
+    }
+
+    QFile file( file_name );
     if ( file.open( QIODevice::WriteOnly ) )
     {
         file.write( text.toLatin1() );
