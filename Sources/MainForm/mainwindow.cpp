@@ -11,6 +11,7 @@
 #include <diagramexecutor.h>
 #include <fusekiserversetting.h>
 #include <ioblocksettings.h>
+#include <mainpage.h>
 #include <sparqlblockwindow.h>
 
 MainWindow::MainWindow( QWidget* parent )
@@ -29,6 +30,7 @@ MainWindow::MainWindow( QWidget* parent )
     library->addBlocks( IOBlockSettings::GetBasedIOBlocks() );
 
     createMainForm();
+    slotOnOpenMainPage();
 }
 
 MainWindow::~MainWindow()
@@ -64,6 +66,8 @@ void MainWindow::createMainForm()
 
 void MainWindow::slotOnOpenMainPage()
 {
+    auto window = new MainPage( this );
+    tab_widget->addWidget( window, tr( "Main Page" ) );
 }
 
 void MainWindow::slotCreateNewProject()
