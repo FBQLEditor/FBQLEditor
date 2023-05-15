@@ -24,25 +24,22 @@ QString BlocksExec::runBlock()
     {
         auto engine = createEngine();
 
-        execScript( engine, "var x = [];" );
-        execScript( engine, "var y = [];" );
-        execScript( engine, "var dep = [];" );
+        execScript( engine, "var inputs = [];" );
+        execScript( engine, "var outputs = [];" );
+        execScript( engine, "var causes = [];" );
 
         for ( int i = 0; i < prev_blocks.size(); ++i )
         {
-            QString name_temp = "input_data" + QString::number( i );
-            QScriptValue temp_value( prev_blocks[i]->getOutputData().toString() );
-            engine->globalObject().setProperty( name_temp, temp_value );
-            execScript( engine, "x.push( " + name_temp + " );" );
+            execScript( engine, "inputs.push( " + prev_blocks[i]->getOutputData().toString() + " );" );
         }
-        engine->globalObject().setProperty( "input", user_data );
+        engine->globalObject().setProperty( "user_data", user_data );
 
         execScript( engine, main_script );
 
-        output_data = engine->globalObject().property( "y" );
+        output_data = engine->globalObject().property( "outputs" );
         logs_exec.push_back( "\nOUTPUT DATA: " + output_data.toString() );
 
-        auto deps = engine->globalObject().property( "dep" ).toString();
+        auto deps = engine->globalObject().property( "causes" ).toString();
         if ( deps.isEmpty() )
         {
             for ( auto prev : prev_blocks )

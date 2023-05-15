@@ -124,48 +124,19 @@ void BasedBlockWindow::slotSave()
 
 void BasedBlockWindow::slotSaveAs()
 {
-    QString file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QStringList list = file_name.split( "." );
-    if ( list.size() == 1 || list.back() != "json" )
-    {
-        file_name += ".json";
-    }
-
-    QFile file( file_name );
-    if ( file.open( QIODevice::WriteOnly ) )
-    {
-        QJsonDocument json;
-        BasedBlockSettings* settings = getSettings();
-        json.setObject( settings->getJsonFromSetting() );
-        file.write( json.toJson() );
-        delete settings;
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Block is saved!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed save block!" ) );
-    }
-    file.close();
+    QJsonDocument json;
+    BasedBlockSettings* settings = getSettings();
+    json.setObject( settings->getJsonFromSetting() );
+    saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
+    delete settings;
 }
 
 void BasedBlockWindow::slotOpen()
 {
-    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QFile file( file_name );
-    if ( file.open( QIODevice::ReadOnly ) )
-    {
-        BasedBlockSettings* settings = new BasedBlockSettings();
-        settings->setSettingFromString( file.readAll() );
-        slotSetName( getName( file_name ) );
-        setSettings( settings );
-        delete settings;
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Block is open!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed open block!" ) );
-    }
-    file.close();
+    BasedBlockSettings* settings = new BasedBlockSettings();
+    settings->setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) ) );
+    setSettings( settings );
+    delete settings;
 }
 
 void BasedBlockWindow::slotTestScript()

@@ -55,47 +55,6 @@ void SGraphicsView::slotCustom()
     // empty
 }
 
-QString SGraphicsView::openFile( const QString& format )
-{
-    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), format );
-    QFile file( file_name );
-    QString result;
-    if ( file.open( QIODevice::ReadOnly ) )
-    {
-        result = file.readAll();
-        emit setTabName( QFileInfo( file.fileName() ).fileName() );
-        //  QMessageBox::about( this, tr( "Based Block" ), tr( "Block is open!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed open block!" ) );
-    }
-    file.close();
-    return result;
-}
-
-void SGraphicsView::saveFile( const QString& text, const QString& format )
-{
-    auto file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), format.toUpper() + " (*." + format + ")" );
-    auto list = file_name.split( "." );
-    if ( list.size() == 1 || list.back() != format )
-    {
-        file_name += "." + format;
-    }
-
-    QFile file( file_name );
-    if ( file.open( QIODevice::WriteOnly ) )
-    {
-        file.write( text.toLatin1() );
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Block is saved!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed save block!" ) );
-    }
-    file.close();
-}
-
 void SGraphicsView::setDiagramScene( DiagramScene* scene )
 {
     diagram_scene = scene;

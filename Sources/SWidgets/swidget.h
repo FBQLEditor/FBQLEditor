@@ -21,6 +21,9 @@ public:
     virtual void saveProject() {}
     virtual void openProject() {}
 
+    virtual QString openFile( const QString& filter );
+    virtual void saveFile( const QString& text, const QString& filter );
+
     explicit SWidget( QWidget* parent = nullptr );
 
 signals:
