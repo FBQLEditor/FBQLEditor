@@ -61,7 +61,6 @@ void BasedBlockWindow::createWidget()
 
     QPushButton* button_info = new QPushButton( tr( "Info" ), this );
     QPushButton* button_save = new QPushButton( tr( "Save" ), this );
-    QPushButton* button_save_as = new QPushButton( tr( "Save as" ), this );
     QPushButton* button_open = new QPushButton( tr( "Open" ), this );
     QPushButton* button_test_script = new QPushButton( tr( "Test Script" ), this );
     QPushButton* button_set_image = new QPushButton( tr( "Set Image" ), this );
@@ -78,8 +77,6 @@ void BasedBlockWindow::createWidget()
         this, SLOT( slotSetImage() ) );
     connect( button_delete_image, SIGNAL( clicked() ),
         this, SLOT( slotDeleteImage() ) );
-    connect( button_save_as, SIGNAL( clicked() ),
-        this, SLOT( slotSaveAs() ) );
 
     line_name = new QLineEdit( this );
     line_line_edit = new QLineEdit( this );
@@ -98,9 +95,8 @@ void BasedBlockWindow::createWidget()
     gridLayout->addWidget( label_pixmap, 0, 4, 3, 1 );
 
     gridLayout->addWidget( button_info, 6, 3, 1, 1 );
-    gridLayout->addWidget( button_save_as, 8, 4, 1, 1 );
-    gridLayout->addWidget( button_save, 8, 3, 1, 1 );
-    gridLayout->addWidget( button_open, 8, 2, 1, 1 );
+    gridLayout->addWidget( button_save, 8, 4, 1, 1 );
+    gridLayout->addWidget( button_open, 8, 3, 1, 1 );
     gridLayout->addWidget( button_test_script, 6, 4, 1, 1 );
     gridLayout->addWidget( button_set_image, 1, 3, 1, 1 );
     gridLayout->addWidget( button_delete_image, 2, 3, 1, 1 );
@@ -119,10 +115,6 @@ void BasedBlockWindow::slotInfo()
 }
 
 void BasedBlockWindow::slotSave()
-{
-}
-
-void BasedBlockWindow::slotSaveAs()
 {
     QJsonDocument json;
     BasedBlockSettings* settings = getSettings();

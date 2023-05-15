@@ -33,7 +33,6 @@ public:
 private slots:
     void slotInfo();
     void slotSave();
-    void slotSaveAs();
     void slotOpen();
     void slotTestScript();
     void slotSetImage();

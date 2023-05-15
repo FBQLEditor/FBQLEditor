@@ -22,6 +22,8 @@ public:
     QMenu* itemMenu;
     QMenu* aboutMenu;
 
+    QAction* main_page;
+
     QAction* toFrontAction;
     QAction* sendBackAction;
     QAction* aboutAction;

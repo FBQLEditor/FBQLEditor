@@ -28,6 +28,7 @@ public:
     ~MainWindow();
 
 public slots:
+    void slotOnOpenMainPage();
     void slotCreateNewProject();
     void slotOnOpenProject();
     void slotOnSaveProject();
