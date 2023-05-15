@@ -7,8 +7,22 @@
 #include <QJsonObject>
 #include <QPainter>
 
+namespace
+{
+QMap<DiagramItemSettings::FileFormat, QString> file_format_converter = {
+    { DiagramItemSettings::ProjectFileFormat, "FBD (*.fbd)" },
+    { DiagramItemSettings::BlockFileFormat, "*.fbql" },
+    { DiagramItemSettings::MainSettingsFileFormat, "FBS (*.fbs)" }
+};
+}
+
 DiagramItemSettings::DiagramItemSettings()
 {
+}
+
+QString DiagramItemSettings::getFileFormat( FileFormat format )
+{
+    return file_format_converter[format];
 }
 
 QJsonValue DiagramItemSettings::jsonValFromPixmap( const QPixmap& p )

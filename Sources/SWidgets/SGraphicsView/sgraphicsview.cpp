@@ -55,9 +55,9 @@ void SGraphicsView::slotCustom()
     // empty
 }
 
-QString SGraphicsView::openFile()
+QString SGraphicsView::openFile( const QString& format )
 {
-    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
+    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), format );
     QFile file( file_name );
     QString result;
     if ( file.open( QIODevice::ReadOnly ) )
@@ -74,16 +74,15 @@ QString SGraphicsView::openFile()
     return result;
 }
 
-void SGraphicsView::saveFile( const QString& text )
+void SGraphicsView::saveFile( const QString& text, const QString& format )
 {
-    QString file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QStringList list = file_name.split( "." );
-    if ( list.size() == 1 || list.back() != "json" )
-    {
-        file_name += ".json";
-    }
+    QFileDialog file_dialog( this, "Save as" );
+    file_dialog.setNameFilter( format );
+    file_dialog.setDefaultSuffix( format );
+    file_dialog.setAcceptMode( QFileDialog::AcceptSave );
+    file_dialog.exec();
 
-    QFile file( file_name );
+    QFile file( file_dialog.selectedFiles().first() );
     if ( file.open( QIODevice::WriteOnly ) )
     {
         file.write( text.toLatin1() );

@@ -41,8 +41,8 @@ public slots:
     virtual void slotOnSaveButtonClicked();
     virtual void slotOnOpenButtonClicked();
     virtual void slotCustom();
-    QString openFile();
-    void saveFile( const QString& );
+    virtual QString openFile( const QString& filter, const QString& format );
+    virtual void saveFile( const QString& text, const QString& filter, const QString& format );
 
 protected:
     virtual QWidget* addCustomWidget() = 0;

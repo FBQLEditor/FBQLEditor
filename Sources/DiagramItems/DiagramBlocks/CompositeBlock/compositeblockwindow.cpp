@@ -62,14 +62,14 @@ void CompositeBlockWindow::slotOnSaveButtonClicked()
     auto settings = getSettings();
     QJsonDocument json;
     json.setObject( settings->getJsonFromSetting() );
-    saveFile( json.toJson() );
+    saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
     delete settings;
 }
 
 void CompositeBlockWindow::slotOnOpenButtonClicked()
 {
     CompositeBlockSettings* settings = new CompositeBlockSettings();
-    settings->setSettingFromString( openFile() );
+    settings->setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) ) );
     setSettings( settings );
 }
 

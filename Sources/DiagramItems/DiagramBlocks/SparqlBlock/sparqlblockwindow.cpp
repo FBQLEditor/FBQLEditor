@@ -106,14 +106,14 @@ void SparqlBlockWindow::slotOnSaveButtonClicked()
     auto settings = getSettings();
     QJsonDocument json;
     json.setObject( settings->getJsonFromSetting() );
-    saveFile( json.toJson() );
+    saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
     delete settings;
 }
 
 void SparqlBlockWindow::slotOnOpenButtonClicked()
 {
     SparqlBlockSettings* settings = new SparqlBlockSettings();
-    settings->setSettingFromString( openFile() );
+    settings->setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) ) );
     setSettings( settings );
 }
 

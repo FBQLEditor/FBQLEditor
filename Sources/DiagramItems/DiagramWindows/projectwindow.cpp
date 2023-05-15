@@ -100,13 +100,13 @@ void ProjectWindow::saveProject()
 
     QJsonDocument json;
     json.setObject( settings.getJsonFromSetting() );
-    saveFile( json.toJson() );
+    saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::ProjectFileFormat ) );
 }
 
 void ProjectWindow::openProject()
 {
     ProjectWindowSettings settings;
-    settings.setSettingFromString( openFile() );
+    settings.setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::ProjectFileFormat ) ) );
 
     QVector<DiagramItem*> blocks_list;
     for ( auto& block : settings.blocks_list )
