@@ -1,0 +1,4 @@
+function CreateNewProject()
+{
+    MainWindow.slotCreateNewProject();
+}
