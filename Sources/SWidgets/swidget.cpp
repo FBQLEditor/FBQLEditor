@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QStandardPaths>
 
 SWidget::SWidget( QWidget* parent )
     : QWidget( parent )
@@ -11,7 +12,7 @@ SWidget::SWidget( QWidget* parent )
 
 QString SWidget::openFile( const QString& format )
 {
-    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), format.toUpper() + " (*." + format + ");;JSON (*.json)" );
+    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ), format.toUpper() + " (*." + format + ");;JSON (*.json)" );
     QFile file( file_name );
     QString result;
     if ( file.open( QIODevice::ReadOnly ) )
@@ -30,7 +31,7 @@ QString SWidget::openFile( const QString& format )
 
 void SWidget::saveFile( const QString& text, const QString& format )
 {
-    auto file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), format.toUpper() + " (*." + format + ")" );
+    auto file_name = QFileDialog::getSaveFileName( this, "Save as", QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ), format.toUpper() + " (*." + format + ")" );
     auto list = file_name.split( "." );
     if ( list.size() == 1 || list.back() != format )
     {

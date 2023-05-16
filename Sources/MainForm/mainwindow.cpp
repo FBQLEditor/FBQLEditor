@@ -25,7 +25,8 @@ MainWindow::MainWindow( QWidget* parent )
     QDir().mkdir( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
 
     library = new BlocksLibrary();
-    library->loadBlocksFromFiles( FOLDER_FOR_BLOCKS );
+    library->loadBlocksFromFiles( FOLDER_FOR_DEFAULT_BLOCKS );
+    library->loadBlocksFromFiles( FOLDER_FOR_USERS_BLOCKS );
     library->addBlocks( AtomBlockSettings::GetBasedAtomBlocks() );
     library->addBlocks( IOBlockSettings::GetBasedIOBlocks() );
 
