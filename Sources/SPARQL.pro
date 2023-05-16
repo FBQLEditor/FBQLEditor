@@ -38,6 +38,7 @@ SOURCES += \
     DiagramItems/FusekiServerWindow/myprocess.cpp \
     MainForm/mainpage.cpp \
     SWidgets/SGraphicsView/sgraphicsview.cpp \
+    SWidgets/SOpenProcessor/sopensaveprocessor.cpp \
     SWidgets/STabWidget/stabwidget.cpp \
     SWidgets/SToolBar/stoolbar.cpp \
     SWidgets/SToolBox/stoolbox.cpp \
@@ -78,6 +79,7 @@ HEADERS += \
     MainForm/mainsettings.h \
     MainForm/mainwindow.h \
     SWidgets/SGraphicsView/sgraphicsview.h \
+    SWidgets/SOpenProcessor/sopensaveprocessor.h \
     SWidgets/STabWidget/stabwidget.h \
     SWidgets/SToolBar/stoolbar.h \
     SWidgets/SMenuBar/smenubar.h \
@@ -95,6 +97,7 @@ INCLUDEPATH += \
     SWidgets/SToolBox \
     SWidgets/STabWidget \
     SWidgets/SGraphicsView \
+    SWidgets/SOpenProcessor \
     DiagramItems/DiagramWindows \
     DiagramItems/DiagramItem \
     DiagramItems/DiagramArrow \

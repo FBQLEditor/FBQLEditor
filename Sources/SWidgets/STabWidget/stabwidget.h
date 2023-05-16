@@ -12,11 +12,11 @@ class STabWidget : public QTabWidget
 public:
     explicit STabWidget( QWidget* parent = nullptr );
 
-    void addWidget( SWidget* widget, const QString& name );
     QVector<DiagramItem*> getBlocksForRun();
     SWidget* currentSWidget();
 
 public slots:
+    void addWidget( SWidget* widget, const QString& name );
     void itemForAdd( DiagramItemSettings* );
     void resetBlocks();
     void deleteItemOnScene();

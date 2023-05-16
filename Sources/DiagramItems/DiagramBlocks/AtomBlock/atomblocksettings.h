@@ -33,6 +33,7 @@ public:
     QJsonObject getJsonFromSetting() override;
     QPixmap image() const override;
 
+    static bool CheckSettings( const QJsonObject& object );
     static QVector<DiagramItemSettings*> GetBasedAtomBlocks();
     static AtomBlockSettings* GetAreaAtomBlock();
     static AtomBlockSettings* GetVarAtomBlock();

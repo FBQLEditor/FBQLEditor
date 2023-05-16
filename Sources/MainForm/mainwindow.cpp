@@ -6,7 +6,6 @@
 
 #include <atomblocksettings.h>
 #include <basedblockwindow.h>
-#include <compositeblocksettings.h>
 #include <compositeblockwindow.h>
 #include <diagramexecutor.h>
 #include <fusekiserversetting.h>
@@ -14,15 +13,18 @@
 #include <mainpage.h>
 #include <sparqlblockwindow.h>
 
+#define APPLICATION_NAME "FBQL Editor"
+
 MainWindow::MainWindow( QWidget* parent )
     : QMainWindow( parent )
     , ui( new Ui::MainWindow )
 {
     ui->setupUi( this );
 
-    QCoreApplication::setApplicationName( tr( "FBQL Editor" ) );
+    QCoreApplication::setApplicationName( APPLICATION_NAME );
     setWindowTitle( QCoreApplication::applicationName() );
     QDir().mkdir( QStandardPaths::writableLocation( QStandardPaths::AppDataLocation ) );
+    QDir().mkdir( QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) + "/" + APPLICATION_NAME );
 
     library = new BlocksLibrary();
     library->loadBlocksFromFiles( FOLDER_FOR_DEFAULT_BLOCKS );
@@ -32,6 +34,9 @@ MainWindow::MainWindow( QWidget* parent )
 
     createMainForm();
     slotOnOpenMainPage();
+
+    open_save_processor = new SOpenSaveProcessor( item_menu, this );
+    connect( open_save_processor, SIGNAL( widgetCreate( SWidget*, QString ) ), tab_widget, SLOT( addWidget( SWidget*, QString ) ) );
 }
 
 MainWindow::~MainWindow()
@@ -131,9 +136,7 @@ void MainWindow::slotOnDeleteItemOnScene()
 
 void MainWindow::slotOnOpenProject()
 {
-    auto window = new ProjectWindow( item_menu, this );
-    tab_widget->addWidget( window, tr( "Project" ) );
-    tab_widget->openProject();
+    open_save_processor->openFBAndCreateWidget();
 }
 
 void MainWindow::slotOnSaveProject()

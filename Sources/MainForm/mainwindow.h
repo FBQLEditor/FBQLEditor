@@ -8,6 +8,7 @@
 
 #include <blockslibrary.h>
 #include <smenubar.h>
+#include <sopensaveprocessor.h>
 #include <stabwidget.h>
 #include <stoolbar.h>
 #include <stoolbox.h>
@@ -55,6 +56,7 @@ private:
     SToolBar* tool_bar;
     SToolBox* tool_box;
     STabWidget* tab_widget;
+    SOpenSaveProcessor* open_save_processor;
 
     BlocksLibrary* library;
 };

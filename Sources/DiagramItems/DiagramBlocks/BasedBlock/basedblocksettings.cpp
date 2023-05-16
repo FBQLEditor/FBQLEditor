@@ -14,9 +14,18 @@ BasedBlockSettings::BasedBlockSettings()
     pixmap = image();
 }
 
+bool BasedBlockSettings::CheckSettings( const QJsonObject& object )
+{
+    if ( object["Header"]["Type"].toString() == "Based" )
+    {
+        return true;
+    }
+    return false;
+}
+
 void BasedBlockSettings::setSettingFromJson( const QJsonObject& object )
 {
-    if ( object["Header"]["Type"] == "Based" )
+    if ( CheckSettings( object ) )
     {
 
         QJsonObject header = object["Header"].toObject();

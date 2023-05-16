@@ -29,6 +29,7 @@ public:
     QJsonArray getJsonArrayFromLineSaver( const QVector<LineSaver>& lines );
     QString getScript() override;
 
+    static bool CheckSettings( const QJsonObject& object );
     static CompositeBlockSettings* CreateTemplateCompositeSettings();
 };
 

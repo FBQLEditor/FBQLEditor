@@ -27,11 +27,10 @@ void BlocksLibrary::loadBlocksFromFiles( const QString& folder )
     for ( int i = 0; i < list.size(); i++ )
     {
         if ( list.at( i ).fileName() == "."
-            || list.at( i ).fileName() == ".."
-            || list.at( i ).suffix() != DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) )
+            || list.at( i ).fileName() == ".." )
             continue;
 
-        if ( list.at( i ).isFile() )
+        if ( list.at( i ).isFile() && ( list.at( i ).suffix() == DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) || list.at( i ).suffix() == "json" ) )
         {
             files.push_back( list.at( i ).absoluteFilePath() );
         }
@@ -42,7 +41,7 @@ void BlocksLibrary::loadBlocksFromFiles( const QString& folder )
             QFileInfoList lst = dir.entryInfoList();
             for ( int j = 0; j < lst.size(); j++ )
             {
-                if ( lst.at( j ).isFile() )
+                if ( lst.at( j ).isFile() && ( lst.at( j ).suffix() == DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) || lst.at( j ).suffix() == "json" ) )
                 {
                     files.push_back( lst.at( j ).absoluteFilePath() );
                 }

@@ -17,9 +17,18 @@ SparqlBlockSettings::~SparqlBlockSettings()
     clear();
 }
 
-void SparqlBlockSettings::setSettingFromJson( const QJsonObject& object )
+bool SparqlBlockSettings::CheckSettings( const QJsonObject& object )
 {
     if ( object["Header"]["Type"].toString() == "Sparql" )
+    {
+        return true;
+    }
+    return false;
+}
+
+void SparqlBlockSettings::setSettingFromJson( const QJsonObject& object )
+{
+    if ( CheckSettings( object ) )
     {
         areas.clear();
         lines.clear();

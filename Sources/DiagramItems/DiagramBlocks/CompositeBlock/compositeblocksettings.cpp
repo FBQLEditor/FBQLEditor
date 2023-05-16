@@ -10,9 +10,18 @@ CompositeBlockSettings::CompositeBlockSettings()
     pixmap = image();
 }
 
-void CompositeBlockSettings::setSettingFromJson( const QJsonObject& object )
+bool CompositeBlockSettings::CheckSettings( const QJsonObject& object )
 {
     if ( object["Header"]["Type"].toString() == "Composite" )
+    {
+        return true;
+    }
+    return false;
+}
+
+void CompositeBlockSettings::setSettingFromJson( const QJsonObject& object )
+{
+    if ( CheckSettings( object ) )
     {
         QJsonValue header = object["Header"];
         QJsonValue body = object["Body"];

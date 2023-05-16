@@ -44,6 +44,7 @@ public:
     QString getScript() override;
     QString getQuery();
 
+    static bool CheckSettings( const QJsonObject& object );
     static SparqlBlockSettings* CreateTemplateSparqlSettings();
 };
 

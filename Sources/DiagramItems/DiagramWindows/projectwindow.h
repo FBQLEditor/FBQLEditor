@@ -1,6 +1,7 @@
 #ifndef PROJECTWINDOW_H
 #define PROJECTWINDOW_H
 
+#include <projectwindowsettings.h>
 #include <sgraphicsview.h>
 
 class ProjectWindow : public SGraphicsView
@@ -18,6 +19,8 @@ public:
     QVector<DiagramArrow*> getDiagramArrows();
     void saveProject() override;
     void openProject() override;
+
+    // QString openFile( const QString& format = {} ) override;
 
 private:
     QWidget* addCustomWidget() override;

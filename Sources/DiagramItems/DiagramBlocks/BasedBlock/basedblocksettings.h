@@ -17,6 +17,8 @@ public:
     QPixmap image() const override;
     QString getScript() override { return script; }
 
+    static bool CheckSettings( const QJsonObject& object );
+
 public:
     bool label;
     QString label_text;

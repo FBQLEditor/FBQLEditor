@@ -4,9 +4,6 @@
 #include <QJsonObject>
 
 #include <diagramitembased.h>
-#include <projectwindowsettings.h>
-
-#include <diagramitembased.h>
 #include <diagramitemcomposite.h>
 #include <diagramitemio.h>
 

@@ -52,9 +52,18 @@ AtomBlockSettings::AtomBlockSettings()
     z_value = 2;
 }
 
-void AtomBlockSettings::setSettingFromJson( const QJsonObject& object )
+bool AtomBlockSettings::CheckSettings( const QJsonObject& object )
 {
     if ( object["Header"]["Type"].toString() == "Atom" )
+    {
+        return true;
+    }
+    return false;
+}
+
+void AtomBlockSettings::setSettingFromJson( const QJsonObject& object )
+{
+    if ( CheckSettings( object ) )
     {
         QJsonValue header = object["Header"];
         QJsonValue body = object["Body"];
