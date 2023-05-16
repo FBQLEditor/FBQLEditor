@@ -26,7 +26,9 @@ void BlocksLibrary::loadBlocksFromFiles( const QString& folder )
     QVector<QString> files;
     for ( int i = 0; i < list.size(); i++ )
     {
-        if ( list.at( i ).fileName() == "." || list.at( i ).fileName() == ".." )
+        if ( list.at( i ).fileName() == "."
+            || list.at( i ).fileName() == ".."
+            || list.at( i ).suffix() != DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) )
             continue;
 
         if ( list.at( i ).isFile() )
