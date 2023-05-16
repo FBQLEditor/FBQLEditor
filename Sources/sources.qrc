@@ -39,5 +39,6 @@
         <file>Sources/images/favicon.ico</file>
         <file>Sources/images/favicon.png</file>
         <file>Sources/html/main_page.html</file>
+        <file>Sources/html/style.css</file>
     </qresource>
 </RCC>

@@ -20,6 +20,7 @@ The program is designed to facilitate the work of users with SPARQL queries:
 - - [ ] sudo apt-get install qtbase5-dev qtchooser qt5-qmake qtbase5-dev-tools
 - - [ ] sudo apt-get install qt5-qmake qtdeclarative5-dev qtscript5-dev libqt5svg5-dev
 - - [ ] sudo apt-get install graphviz-dev
+- - [ ] sudo apt-get install libqt5webkit5-dev
 
 # How to run
 - [ ] Windows 10: The startup is performed using the executable file ".exe", which appeared in the folder with the installed program. 
