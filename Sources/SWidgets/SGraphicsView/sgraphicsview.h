@@ -8,6 +8,7 @@
 #include <QGroupBox>
 #include <QSlider>
 #include <QSpinBox>
+#include <QStackedWidget>
 
 #include <swidget.h>
 
@@ -30,9 +31,9 @@ public:
     void setDiagramScene( DiagramScene* );
     void createSidePanel();
     void removeSelectedGraphicsItems();
-    QWidget* getWidgetOnGraphicsView();
 
     DiagramScene* getScene();
+    QStackedWidget* getStackedWidget();
 
 public slots:
     void setItemForScene( DiagramItemSettings* );
@@ -40,7 +41,6 @@ public slots:
     virtual void slotOnCreateButtonClicked();
     virtual void slotOnSaveButtonClicked();
     virtual void slotOnOpenButtonClicked();
-    virtual void slotCustom();
 
 protected:
     virtual QWidget* addCustomWidget() = 0;
@@ -60,9 +60,10 @@ signals:
     void ERROR( QString );
 
 private:
-    QWidget* widget_on_view;
     DiagramScene* diagram_scene;
     QMenu* context_menu;
+    QStackedWidget* stacked_widget;
+
     QGraphicsView* graphics_view;
     QGroupBox* group_box;
     QGridLayout* grid_layout;

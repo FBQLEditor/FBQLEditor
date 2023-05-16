@@ -35,11 +35,12 @@ public slots:
     void slotCreateBasedBlock();
     void slotCreateCompositeBlock();
     void slotCreateSparqlBlock();
-    void slotCurrentTabMode( int );
-    void slotOnCreateBlock( DiagramItemSettings* );
     void slotOnClickedBlockExecutor();
     void slotOnDeleteItemOnScene();
     void slotOnSettingFusekiServer();
+
+    void slotCurrentTabMode( int );
+    void slotOnCreateBlock( DiagramItemSettings* );
     void setItemMenu( QMenu* );
 
 private:

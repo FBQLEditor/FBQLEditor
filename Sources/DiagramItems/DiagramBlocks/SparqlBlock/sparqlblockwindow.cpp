@@ -12,6 +12,9 @@ SparqlBlockWindow::SparqlBlockWindow( QMenu* context_menu, QWidget* parent )
 {
     createSidePanel();
     setSettings( SparqlBlockSettings::CreateTemplateSparqlSettings() );
+
+    query_edit = new QTextEdit( this );
+    getStackedWidget()->insertWidget( getStackedWidget()->count(), query_edit );
 }
 
 QWidget* SparqlBlockWindow::addCustomWidget()
@@ -47,17 +50,17 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     QGridLayout* grid_layout = new QGridLayout();
     widget->setLayout( grid_layout );
 
-    QPushButton* button_create_block = new QPushButton( tr( "Create" ), this );
+    QPushButton* button_create_block = new QPushButton( "Create", this );
     connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
 
-    QPushButton* button_save_block = new QPushButton( tr( "Save" ), this );
+    QPushButton* button_save_block = new QPushButton( "Save", this );
     connect( button_save_block, SIGNAL( clicked() ), this, SLOT( slotOnSaveButtonClicked() ) );
 
-    QPushButton* button_open_block = new QPushButton( tr( "Open" ), this );
+    QPushButton* button_open_block = new QPushButton( "Open", this );
     connect( button_open_block, SIGNAL( clicked() ), this, SLOT( slotOnOpenButtonClicked() ) );
 
-    QPushButton* button_write_query = new QPushButton( tr( "Query" ), this );
-    connect( button_write_query, SIGNAL( clicked() ), this, SLOT( slotCustom() ) );
+    QPushButton* button_write_query = new QPushButton( "Query", this );
+    connect( button_write_query, SIGNAL( clicked() ), this, SLOT( slotOpenQuery() ) );
 
     grid_layout->addWidget( button_write_query, 0, 0 );
     grid_layout->addWidget( button_create_block, 1, 0 );
@@ -67,32 +70,18 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     return widget;
 }
 
-void SparqlBlockWindow::slotCustom()
+void SparqlBlockWindow::slotOpenQuery()
 {
-    if ( nullptr == text_edit )
+    if ( getStackedWidget()->currentIndex() == 0 )
     {
-        QGridLayout* grid_widget = new QGridLayout();
-        getWidgetOnGraphicsView()->setLayout( grid_widget );
-        text_edit = new QTextEdit();
-        text_edit->setStyleSheet( "color: black;" );
         auto settings = getSettings();
-        text_edit->setText( settings->getQuery() );
+        query_edit->setText( settings->getQuery() );
         delete settings;
-        getWidgetOnGraphicsView()->setGeometry( QRect( ( int )( width() / 2 - 600 ), ( int )( height() / 2 - 500 ), 1200, 1000 ) );
-        grid_widget->addWidget( text_edit, 0, 0 );
-    }
-    else if ( text_edit->isHidden() )
-    {
-        text_edit->show();
-        getWidgetOnGraphicsView()->setGeometry( QRect( ( int )( width() / 2 - 600 ), ( int )( height() / 2 - 500 ), 1200, 1000 ) );
-        auto settings = getSettings();
-        text_edit->setText( settings->getQuery() );
-        delete settings;
+        getStackedWidget()->setCurrentWidget( query_edit );
     }
     else
     {
-        getWidgetOnGraphicsView()->setGeometry( QRect( 0, 0, 0, 0 ) );
-        text_edit->hide();
+        getStackedWidget()->setCurrentIndex( 0 );
     }
 }
 

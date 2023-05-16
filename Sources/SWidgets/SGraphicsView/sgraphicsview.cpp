@@ -22,17 +22,18 @@ void SGraphicsView::createDiagramView()
     group_box = new QGroupBox( this );
     group_box->setMaximumWidth( 220 );
 
-    grid_layout->addWidget( graphics_view, 0, 0 );
-    grid_layout->addWidget( group_box, 0, 1 );
+    stacked_widget = new QStackedWidget( this );
+    stacked_widget->insertWidget( stacked_widget->count(), graphics_view );
 
-    widget_on_view = new QWidget( graphics_view );
+    grid_layout->addWidget( stacked_widget, 0, 0 );
+    grid_layout->addWidget( group_box, 0, 1 );
 
     setDiagramScene( createDiagramScene() );
 }
 
-QWidget* SGraphicsView::getWidgetOnGraphicsView()
+QStackedWidget* SGraphicsView::getStackedWidget()
 {
-    return widget_on_view;
+    return stacked_widget;
 }
 
 void SGraphicsView::slotOnCreateButtonClicked()
@@ -46,11 +47,6 @@ void SGraphicsView::slotOnSaveButtonClicked()
 }
 
 void SGraphicsView::slotOnOpenButtonClicked()
-{
-    // empty
-}
-
-void SGraphicsView::slotCustom()
 {
     // empty
 }
