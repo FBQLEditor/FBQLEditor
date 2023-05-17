@@ -2,8 +2,6 @@
 
 #include <QGridLayout>
 #include <QPushButton>
-#include <QWebEnginePage>
-#include <QWebChannel>
 
 MainPage::MainPage( MainWindow* main_window )
     : SWidget( main_window )
@@ -20,10 +18,10 @@ void MainPage::createForm()
 
     QPushButton* button_back = new QPushButton( "<< Back <<", this );
 
-    web = new QWebEngineView( this );
-    QWebChannel* channel = new QWebChannel( web->page() );
-    web->page()->setWebChannel( channel );
-    channel->registerObject( "MainWindow", main_window );
+    web = new QTextBrowser( this );
+    //QWebChannel* channel = new QWebChannel( web->page() );
+    //web->page()->setWebChannel( channel );
+    //channel->registerObject( "MainWindow", main_window );
 
     //connect( button_back, SIGNAL( clicked() ), web, SLOT( back() ) );
 
@@ -33,5 +31,5 @@ void MainPage::createForm()
 
 void MainPage::makePage()
 {
-    web->load( QUrl( "qrc:///Sources/html/main_page.html" ) );
+    web->setSource( QUrl( "qrc:///Sources/html/main_page.html" ) );
 }

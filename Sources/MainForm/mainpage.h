@@ -1,7 +1,7 @@
 #ifndef MAINPAGE_H
 #define MAINPAGE_H
 
-#include <QWebEngineView>
+#include <QTextBrowser>
 
 #include <mainwindow.h>
 #include <swidget.h>
@@ -19,7 +19,7 @@ public:
     void makePage();
 
 private:
-    QWebEngineView* web;
+    QTextBrowser* web;
     MainWindow* main_window;
 };
 
