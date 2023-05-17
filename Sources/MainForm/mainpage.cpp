@@ -2,7 +2,8 @@
 
 #include <QGridLayout>
 #include <QPushButton>
-#include <QWebFrame>
+#include <QWebEnginePage>
+#include <QWebChannel>
 
 MainPage::MainPage( MainWindow* main_window )
     : SWidget( main_window )
@@ -19,10 +20,12 @@ void MainPage::createForm()
 
     QPushButton* button_back = new QPushButton( "<< Back <<", this );
 
-    web = new QWebView( this );
-    web->page()->mainFrame()->addToJavaScriptWindowObject( "MainWindow", main_window );
+    web = new QWebEngineView( this );
+    QWebChannel* channel = new QWebChannel( web->page() );
+    web->page()->setWebChannel( channel );
+    channel->registerObject( "MainWindow", main_window );
 
-    connect( button_back, SIGNAL( clicked() ), web, SLOT( back() ) );
+    //connect( button_back, SIGNAL( clicked() ), web, SLOT( back() ) );
 
     grid_layout->addWidget( button_back );
     grid_layout->addWidget( web );

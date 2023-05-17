@@ -1,4 +1,4 @@
-QT       += core gui network script webkitwidgets
+QT       += core gui network script webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
