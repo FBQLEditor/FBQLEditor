@@ -18,10 +18,7 @@ void MainPage::createForm()
 
     QPushButton* button_back = new QPushButton( "<< Back <<", this );
 
-    web = new QTextBrowser( this );
-    //QWebChannel* channel = new QWebChannel( web->page() );
-    //web->page()->setWebChannel( channel );
-    //channel->registerObject( "MainWindow", main_window );
+    web = new QWebEngineView( this );
 
     //connect( button_back, SIGNAL( clicked() ), web, SLOT( back() ) );
 
@@ -31,5 +28,10 @@ void MainPage::createForm()
 
 void MainPage::makePage()
 {
-    web->setSource( QUrl( "qrc:///Sources/html/main_page.html" ) );
+    web->load( QUrl( "qrc:///Sources/html/main_page.html" ) );
+}
+
+void MainPage::openPrevPage()
+{
+    web->page()->triggerAction( QWebEnginePage::Back );
 }

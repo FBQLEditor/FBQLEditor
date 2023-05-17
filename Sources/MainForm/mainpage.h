@@ -2,6 +2,7 @@
 #define MAINPAGE_H
 
 #include <QTextBrowser>
+#include <QWebEngineView>
 
 #include <mainwindow.h>
 #include <swidget.h>
@@ -18,8 +19,12 @@ public:
     void createForm();
     void makePage();
 
+private slots:
+    void openPrevPage();
+
 private:
-    QTextBrowser* web;
+    QWebEngineView* web;
+
     MainWindow* main_window;
 };
 
