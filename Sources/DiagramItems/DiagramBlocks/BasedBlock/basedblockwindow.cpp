@@ -68,9 +68,9 @@ void BasedBlockWindow::createWidget()
     connect( button_info, SIGNAL( clicked() ),
         this, SLOT( slotInfo() ) );
     connect( button_save, SIGNAL( clicked() ),
-        this, SLOT( slotSave() ) );
+        this, SLOT( slotOnSaveButtonClicked() ) );
     connect( button_open, SIGNAL( clicked() ),
-        this, SLOT( slotOpen() ) );
+        this, SLOT( slotOnOpenButtonClicked() ) );
     connect( button_test_script, SIGNAL( clicked() ),
         this, SLOT( slotTestScript() ) );
     connect( button_set_image, SIGNAL( clicked() ),
@@ -114,7 +114,7 @@ void BasedBlockWindow::slotInfo()
 {
 }
 
-void BasedBlockWindow::slotSave()
+void BasedBlockWindow::slotOnSaveButtonClicked()
 {
     QJsonDocument json;
     BasedBlockSettings* settings = getSettings();
@@ -123,7 +123,7 @@ void BasedBlockWindow::slotSave()
     delete settings;
 }
 
-void BasedBlockWindow::slotOpen()
+void BasedBlockWindow::slotOnOpenButtonClicked()
 {
     BasedBlockSettings* settings = new BasedBlockSettings();
     settings->setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) ) );

@@ -98,20 +98,7 @@ void STabWidget::deleteItemOnScene()
     }
 }
 
-void STabWidget::saveProject()
+void STabWidget::callSaveCurrentWidget()
 {
-    auto widget = currentSWidget();
-    if ( nullptr != widget )
-    {
-        widget->saveProject();
-    }
-}
-
-void STabWidget::openProject()
-{
-    auto widget = currentSWidget();
-    if ( nullptr != widget )
-    {
-        widget->openProject();
-    }
+    currentSWidget()->slotOnSaveButtonClicked();
 }

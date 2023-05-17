@@ -19,13 +19,16 @@ public:
     };
     virtual SWidgetTypes typeSWidget() { return SWidgetType; }
     virtual int modeDiagramBlocks() { return BlocksLibrary::ModeBlocks::None; }
-    virtual void saveProject() {}
-    virtual void openProject() {}
 
     virtual QString openFile( const QString& filter );
     virtual void saveFile( const QString& text, const QString& filter );
 
     explicit SWidget( QWidget* parent = nullptr );
+
+public slots:
+    virtual void slotOnCreateButtonClicked(){};
+    virtual void slotOnSaveButtonClicked(){};
+    virtual void slotOnOpenButtonClicked(){};
 
 signals:
     void setTabName( QString );

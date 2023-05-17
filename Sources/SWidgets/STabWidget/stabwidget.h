@@ -20,9 +20,8 @@ public slots:
     void itemForAdd( DiagramItemSettings* );
     void resetBlocks();
     void deleteItemOnScene();
-    void saveProject();
-    void openProject();
     void setTabName( QString );
+    void callSaveCurrentWidget();
 
 private:
     void createTabWidgets();

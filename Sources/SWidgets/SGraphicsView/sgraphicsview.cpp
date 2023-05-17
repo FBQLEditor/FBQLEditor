@@ -36,21 +36,6 @@ QStackedWidget* SGraphicsView::getStackedWidget()
     return stacked_widget;
 }
 
-void SGraphicsView::slotOnCreateButtonClicked()
-{
-    // empty
-}
-
-void SGraphicsView::slotOnSaveButtonClicked()
-{
-    // empty
-}
-
-void SGraphicsView::slotOnOpenButtonClicked()
-{
-    // empty
-}
-
 void SGraphicsView::setDiagramScene( DiagramScene* scene )
 {
     diagram_scene = scene;

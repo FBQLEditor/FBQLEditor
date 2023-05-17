@@ -101,7 +101,7 @@ void DiagramItemComposite::setSettings( CompositeBlockSettings* new_settings )
     settings = new_settings;
 }
 
-DiagramItemIO* DiagramItemComposite::getInputBlock( QString& name )
+DiagramItemIO* DiagramItemComposite::getInputBlock( const QString& name )
 {
     for ( const auto& input : input_blocks )
     {
@@ -112,7 +112,7 @@ DiagramItemIO* DiagramItemComposite::getInputBlock( QString& name )
     }
 }
 
-DiagramItemIO* DiagramItemComposite::getOutputBlock( QString& name )
+DiagramItemIO* DiagramItemComposite::getOutputBlock( const QString& name )
 {
     for ( const auto& output : output_blocks )
     {
@@ -123,12 +123,12 @@ DiagramItemIO* DiagramItemComposite::getOutputBlock( QString& name )
     }
 }
 
-QVector<DiagramArrow*> DiagramItemComposite::getArrowForInputBlock( QString& name )
+QVector<DiagramArrow*> DiagramItemComposite::getArrowForInputBlock( const QString& name )
 {
     return getInputBlock( name )->getEndArrows();
 }
 
-QVector<DiagramArrow*> DiagramItemComposite::getArrowForOutputBlock( QString& name )
+QVector<DiagramArrow*> DiagramItemComposite::getArrowForOutputBlock( const QString& name )
 {
     return getOutputBlock( name )->getStartArrows();
 }

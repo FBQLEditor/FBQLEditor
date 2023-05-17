@@ -18,8 +18,10 @@ FusekiServerSetting::FusekiServerSetting( QWidget* parent )
 void FusekiServerSetting::createWidget()
 {
     QLabel* label_ip_fuseki = new QLabel( "IP-adress Fuseki Server:", this );
+    label_ip_fuseki->setMaximumHeight( 30 );
     line_ip_fuseki = new QLineEdit( this );
     QLabel* label_port_fuseki = new QLabel( "Port Fuseki Server:", this );
+    label_port_fuseki->setMaximumHeight( 30 );
     line_port_fuseki = new QLineEdit( this );
     line_port_fuseki->setValidator( new QIntValidator( 1024, 65535, this ) );
 

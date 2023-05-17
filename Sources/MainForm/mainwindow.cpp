@@ -141,7 +141,7 @@ void MainWindow::slotOnOpenProject()
 
 void MainWindow::slotOnSaveProject()
 {
-    tab_widget->saveProject();
+    tab_widget->callSaveCurrentWidget();
 }
 
 void MainWindow::slotOnSettingFusekiServer()

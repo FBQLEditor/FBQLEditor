@@ -62,9 +62,9 @@ void SOpenSaveProcessor::openFBAndCreateWidget()
                 else if ( ProjectWindowSettings::CheckSettings( object ) )
                 {
                     auto widget = new ProjectWindow( context_menu, my_parent );
-                    auto settings = new ProjectWindowSettings();
-                    settings->setSettingFromJson( object );
-                    // widget->setSettings( settings );
+                    ProjectWindowSettings settings;
+                    settings.setSettingFromJson( object );
+                    widget->setSettings( settings );
                     emit widgetCreate( widget, short_name );
                 }
             }
