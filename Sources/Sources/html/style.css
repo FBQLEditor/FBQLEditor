@@ -2,6 +2,54 @@ a{
     color: blue;
 }
 
+body {
+    background-color: WhiteSmoke;
+}
+
 h1{
     color: #95d929;
+    font-size: 50px;
+}
+
+h3{ 
+    color: #95d929;
+    font-size: 25px;
+}
+
+.d1 {
+    float: left;
+    width: 700px; 
+    height: 180px;
+
+}
+
+.d2 {
+    float: left;
+    width: 700px; 
+    height: 300px;
+    border-radius: 5px;
+}
+
+.d3 {
+    display: flex;
+    margin-left: auto;
+    height: 300px; 
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.d4 {
+    float: left;
+    width: 700px; 
+    height: 300px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.d5 {
+    display: flex;
+    margin-left: auto;
+    height: 480px;
+    border: 1px solid black;
+    border-radius: 10px;
 }

@@ -38,8 +38,10 @@
         <file>Sources/images/icon.png</file>
         <file>Sources/images/favicon.ico</file>
         <file>Sources/images/favicon.png</file>
-        <file>Sources/html/main_page.html</file>
         <file>Sources/html/style.css</file>
         <file>Sources/html/script.js</file>
+        <file>Sources/html/menu.png</file>
+        <file>Sources/html/Using.html</file>
+        <file>Sources/html/Welcome.html</file>
     </qresource>
 </RCC>
