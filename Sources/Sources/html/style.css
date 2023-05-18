@@ -15,9 +15,10 @@ h1{
 
 .sec {
     width: 100%;
-    height: 400px;
+    height: 500px;
     display: flex;
     flex-flow: row nowrap;
+
 }
 
 .third {
@@ -31,10 +32,6 @@ h1{
     display:flex;
     width: 100%;
     height: 70px;
-}
-
-.im {
-    float: left;
 }
 
 h3{ 
@@ -51,20 +48,26 @@ h3{
 
 .d2 {
     flex-grow: 1;
-    height: 400px;
+    height: 500px;
+    width: 50%;
+        margin-top: 100px;
 }
 
 .d3 {
     flex-grow: 9;
-    height: 400px; 
+    height: 500px;
+        width: 50%;
+        margin-top: 100px;
 }
 
 .d4 {
     flex-grow: 6;
+        width: 50%;
     height: 600px;
 }
 
 .d5 {
     flex-grow: 5;
+        width: 50%;
     height: 600px;
 }
