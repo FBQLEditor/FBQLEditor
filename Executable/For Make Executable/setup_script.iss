@@ -2,8 +2,10 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FBQL Editor"
-#define MyAppVersion "0.5"
+#define MyAppVersion "0.6"
 #define MyAppExeName "SPARQL.exe"
+#define MyAppPublisher "FBQL Editor"
+#define MyAppURL "https://github.com/FBQLEditor/FBQLEditor"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
@@ -11,6 +13,10 @@
 AppId={{766FE1C7-8DF9-44E3-A831-669201E765BC}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
+AppPublisher={#MyAppPublisher}
+AppPublisherURL={#MyAppURL}
+AppSupportURL={#MyAppURL}
+AppUpdatesURL={#MyAppURL}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 DefaultDirName="C:\Program Files\FBQL Editor"
 DisableProgramGroupPage=yes
@@ -19,6 +25,7 @@ DisableProgramGroupPage=yes
 OutputDir=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Executable\latest
 OutputBaseFilename=FBQL Editor Setup
 SetupIconFile=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Sources\icon.ico
+ChangesAssociations=yes
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -33,8 +40,8 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
 Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\FusekiServer\*";  DestDir: "{userappdata}\FBQL Editor\FusekiServer"; Flags: ignoreversion createallsubdirs recursesubdirs comparetimestamp
-Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\configuration.set";  DestDir: "{userappdata}\FBQL Editor\"; Flags: ignoreversion createallsubdirs comparetimestamp
+Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\build-SPARQL-Desktop_Qt_5_12_12_MSVC2017_64bit-Release\FBQL Settings.fbs";  DestDir: "{userappdata}\FBQL Editor\"; Flags: ignoreversion 
+Source: "C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Blocks\*";  DestDir: "{userappdata}\FBQL Editor\Blocks"; Flags: ignoreversion createallsubdirs recursesubdirs comparetimestamp
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
