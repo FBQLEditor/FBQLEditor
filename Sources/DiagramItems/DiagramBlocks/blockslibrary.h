@@ -9,11 +9,10 @@
 
 #ifdef QT_DEBUG
 #define FOLDER_FOR_DEFAULT_BLOCKS "../Blocks/"
-#define FOLDER_FOR_USERS_BLOCKS "../UsersBlocks/"
 #else
 #define FOLDER_FOR_DEFAULT_BLOCKS QStandardPaths::writableLocation( QStandardPaths::AppDataLocation )
-#define FOLDER_FOR_USERS_BLOCKS QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) + "/FBQL Editor/"
 #endif
+#define FOLDER_FOR_USERS_BLOCKS QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) + "/FBQL Editor/"
 
 class BlocksLibrary
 {

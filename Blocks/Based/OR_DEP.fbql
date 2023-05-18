@@ -7,7 +7,7 @@
             "X": 0,
             "Y": 0
         },
-        "Script": "var flag = \"false\";\nfor(var i = 0; i < x.length; i++){\n\tif( x[i] == \"true\"){\n\t\tflag = \"true\";\n\t\tbreak;\n\t}\n}\n\n// depends\nfor(var i = 0; i < x.length; i++){\n\tif(x[i] == flag ){\n\t\tdep.push( i );  \n\t}\n}\n\ny.push(flag);\n",
+        "Script": "output = \"false\";\nfor(var i = 0; i < inputs.length; i++){\n\tif( inputs[i] == \"true\"){\n\t\toutput = \"true\";\n\t\tbreak;\n\t}\n}\n\n// depends\nfor(var i = 0; i < inputs.length; i++){\n\tif(inputs[i] == output ){\n\t\tcauses.push( i );  \n\t}\n}\n\n",
         "Text_Edit": "",
         "Text_Label": "label"
     },

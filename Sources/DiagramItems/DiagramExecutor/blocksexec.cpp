@@ -25,7 +25,7 @@ QString BlocksExec::runBlock()
         auto engine = createEngine();
 
         execScript( engine, "var inputs = [];" );
-        execScript( engine, "var outputs = [];" );
+        execScript( engine, "var output = \"\";" );
         execScript( engine, "var causes = [];" );
 
         for ( int i = 0; i < prev_blocks.size(); ++i )
@@ -36,7 +36,7 @@ QString BlocksExec::runBlock()
 
         execScript( engine, main_script );
 
-        output_data = engine->globalObject().property( "outputs" );
+        output_data = engine->globalObject().property( "output" );
         logs_exec.push_back( "\nOUTPUT DATA: " + output_data.toString() );
 
         auto deps = engine->globalObject().property( "causes" ).toString();

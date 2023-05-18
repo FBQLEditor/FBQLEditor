@@ -15,6 +15,9 @@ BasedBlockWindow::BasedBlockWindow( const BasedMode& mode, QWidget* parent )
 {
     setMode( mode );
     createWidget();
+    BasedBlockSettings* settings = new BasedBlockSettings();
+    setSettings( settings );
+    delete settings;
 }
 
 void BasedBlockWindow::setMode( const BasedMode& mode )

@@ -7,12 +7,12 @@
             "X": 0,
             "Y": 0
         },
-        "Script": "var flag = \"true\";\nfor(var i = 0; i < x.length; i++){\n\tif(x[i] == \"false\"){\n\t\tflag = \"false\";\n\t\tbreak;\n\t}\n}\n\n// depends\nfor(var i = 0; i < x.length; i++){\n\tif(x[i] == flag ){\n\t\tdep.push( i );  \n\t}\n}\n\ny.push(flag);",
+        "Script": "output = \"true\";\nfor(var i = 0; i < inputs.length; i++){\n\tif( inputs[i] == \"false\" ){\n\t\toutput = \"false\";\n\t\tbreak;\n\t}\n}",
         "Text_Edit": "",
         "Text_Label": "label"
     },
     "Header": {
-        "Name": "AND_DEP",
+        "Name": "AND",
         "Type": "Based"
     }
 }

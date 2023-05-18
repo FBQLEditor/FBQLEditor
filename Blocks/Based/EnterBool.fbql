@@ -8,7 +8,7 @@
             "X": 0,
             "Y": 0
         },
-        "Script": "y.push(input);",
+        "Script": "output = Boolean( user_data );",
         "Text_Edit": "true",
         "Text_Label": "Bool:"
     },

@@ -7,7 +7,7 @@
             "X": 0,
             "Y": 0
         },
-        "Script": "var result = 1;\nfor(var i = 0; i < x.length; i++){\n\tif (  x[i] == \"true\" )\n\t{\n\t\tx[i] = 1;\n\t} \n\telse if ( x[i] == \"false\" )\n\t{\n\t\tx[i] = 0;\n\t}\n\tresult *= Number(x[i]);\n}\ny.push(result);",
+        "Script": "output = 1;\nfor(var i = 0; i < inputs.length; i++){\n\tif (  inputs[i] == \"true\" )\n\t{\n\t\tinputs[i] = 1;\n\t} \n\telse if ( inputs[i] == \"false\" )\n\t{\n\t\tinputs[i] = 0;\n\t}\n\toutput *= Number(inputs[i]);\n}",
         "Text_Edit": "",
         "Text_Label": "label"
     },

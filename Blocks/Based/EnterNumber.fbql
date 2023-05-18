@@ -7,7 +7,7 @@
             "X": 0,
             "Y": 0
         },
-        "Script": "y.push(Number(input));",
+        "Script": "output = Number( user_data );",
         "Text_Edit": "0",
         "Text_Label": "Number:"
     },

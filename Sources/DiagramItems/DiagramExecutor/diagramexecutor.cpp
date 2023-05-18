@@ -344,8 +344,6 @@ void DiagramExecutor::logs_sniff( QStringList str_list )
 
 void DiagramExecutor::execute()
 {
-    QString command = QString( "./" ) + FUSEKI_SERVER_PATH;
-    process.start( command );
     text_edit_output->clear();
     while ( true )
     {
@@ -366,8 +364,4 @@ void DiagramExecutor::execute()
             break;
         }
     }
-    QString output = text_edit_output->toPlainText();
-    paint();
-    text_edit_output->insertPlainText( output + "\n-------------------------------------------------------------------------------\n" );
-    process.terminate();
 }
