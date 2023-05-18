@@ -31,10 +31,10 @@ public:
     QString getName( const QString& path );
 
 private slots:
+    void slotOnSaveButtonClicked() override;
+    void slotOnOpenButtonClicked() override;
+
     void slotInfo();
-    void slotSave();
-    void slotSaveAs();
-    void slotOpen();
     void slotTestScript();
     void slotSetImage();
     void slotDeleteImage();

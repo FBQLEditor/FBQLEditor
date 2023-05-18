@@ -22,78 +22,18 @@ void SGraphicsView::createDiagramView()
     group_box = new QGroupBox( this );
     group_box->setMaximumWidth( 220 );
 
-    grid_layout->addWidget( graphics_view, 0, 0 );
-    grid_layout->addWidget( group_box, 0, 1 );
+    stacked_widget = new QStackedWidget( this );
+    stacked_widget->insertWidget( stacked_widget->count(), graphics_view );
 
-    widget_on_view = new QWidget( graphics_view );
+    grid_layout->addWidget( stacked_widget, 0, 0 );
+    grid_layout->addWidget( group_box, 0, 1 );
 
     setDiagramScene( createDiagramScene() );
 }
 
-QWidget* SGraphicsView::getWidgetOnGraphicsView()
+QStackedWidget* SGraphicsView::getStackedWidget()
 {
-    return widget_on_view;
-}
-
-void SGraphicsView::slotOnCreateButtonClicked()
-{
-    // empty
-}
-
-void SGraphicsView::slotOnSaveButtonClicked()
-{
-    // empty
-}
-
-void SGraphicsView::slotOnOpenButtonClicked()
-{
-    // empty
-}
-
-void SGraphicsView::slotCustom()
-{
-    // empty
-}
-
-QString SGraphicsView::openFile()
-{
-    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QFile file( file_name );
-    QString result;
-    if ( file.open( QIODevice::ReadOnly ) )
-    {
-        result = file.readAll();
-        emit setTabName( QFileInfo( file.fileName() ).fileName() );
-        //  QMessageBox::about( this, tr( "Based Block" ), tr( "Block is open!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed open block!" ) );
-    }
-    file.close();
-    return result;
-}
-
-void SGraphicsView::saveFile( const QString& text )
-{
-    QString file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QStringList list = file_name.split( "." );
-    if ( list.size() == 1 || list.back() != "json" )
-    {
-        file_name += ".json";
-    }
-
-    QFile file( file_name );
-    if ( file.open( QIODevice::WriteOnly ) )
-    {
-        file.write( text.toLatin1() );
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Block is saved!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed save block!" ) );
-    }
-    file.close();
+    return stacked_widget;
 }
 
 void SGraphicsView::setDiagramScene( DiagramScene* scene )

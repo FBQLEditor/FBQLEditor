@@ -1,6 +1,7 @@
 #ifndef PROJECTWINDOW_H
 #define PROJECTWINDOW_H
 
+#include <projectwindowsettings.h>
 #include <sgraphicsview.h>
 
 class ProjectWindow : public SGraphicsView
@@ -16,12 +17,18 @@ public:
 
     QVector<DiagramItem*> getDiagramItems();
     QVector<DiagramArrow*> getDiagramArrows();
-    void saveProject() override;
-    void openProject() override;
+
+    void setSettings( const ProjectWindowSettings& settings );
+    ProjectWindowSettings getSettings();
+
+public slots:
+    void slotOnSaveButtonClicked() override;
+    void slotOnOpenButtonClicked() override;
 
 private:
     QWidget* addCustomWidget() override;
     QWidget* addCustomBotWidget() override;
+
 signals:
 
 private:

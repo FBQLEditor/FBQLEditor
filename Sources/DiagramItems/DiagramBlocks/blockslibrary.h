@@ -2,16 +2,17 @@
 #define BLOCKSLIBRARY_H
 
 #include <QMap>
-#include <QVector>
 #include <QString>
+#include <QVector>
 
 #include <diagramitemsettings.h>
 
 #ifdef QT_DEBUG
-#define FOLDER_FOR_BLOCKS "../Blocks/"
+#define FOLDER_FOR_DEFAULT_BLOCKS "../Blocks/"
 #else
-#define FOLDER_FOR_BLOCKS "Blocks/"
+#define FOLDER_FOR_DEFAULT_BLOCKS QStandardPaths::writableLocation( QStandardPaths::AppDataLocation )
 #endif
+#define FOLDER_FOR_USERS_BLOCKS QStandardPaths::writableLocation( QStandardPaths::DocumentsLocation ) + "/FBQL Editor/"
 
 class BlocksLibrary
 {
@@ -32,10 +33,7 @@ public:
 
     void addBlock( DiagramItemSettings* settings );
     void addBlocks( const QVector<DiagramItemSettings*>& settings_list );
-    // void addBlock( DiagramItem* item );
-    // void addBlocks( QVector<DiagramItem*>& items );
 
-    // void deleteBlock( DiagramItem* item );
     void addBlockFromJson( QString& text );
     void deleteBlocks( int modes_blocks );
 
@@ -44,7 +42,6 @@ public:
 
 private:
     ModeBlocks getMode( DiagramItemSettings* settings );
-    // ModeBlocks getMode( DiagramItem* item );
 
 private:
     QMap<DiagramItemSettings*, ModeBlocks> library;

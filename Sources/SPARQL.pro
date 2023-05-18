@@ -1,4 +1,4 @@
-QT       += core gui network script
+QT       += core gui network script webenginewidgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -36,7 +36,9 @@ SOURCES += \
     DiagramItems/DiagramWindows/projectwindow.cpp \
     DiagramItems/DiagramWindows/projectwindowsettings.cpp \
     DiagramItems/FusekiServerWindow/myprocess.cpp \
+    MainForm/mainpage.cpp \
     SWidgets/SGraphicsView/sgraphicsview.cpp \
+    SWidgets/SOpenProcessor/sopensaveprocessor.cpp \
     SWidgets/STabWidget/stabwidget.cpp \
     SWidgets/SToolBar/stoolbar.cpp \
     SWidgets/SToolBox/stoolbox.cpp \
@@ -73,9 +75,11 @@ HEADERS += \
     DiagramItems/DiagramWindows/projectwindow.h \
     DiagramItems/DiagramWindows/projectwindowsettings.h \
     DiagramItems/FusekiServerWindow/myprocess.h \
+    MainForm/mainpage.h \
     MainForm/mainsettings.h \
     MainForm/mainwindow.h \
     SWidgets/SGraphicsView/sgraphicsview.h \
+    SWidgets/SOpenProcessor/sopensaveprocessor.h \
     SWidgets/STabWidget/stabwidget.h \
     SWidgets/SToolBar/stoolbar.h \
     SWidgets/SMenuBar/smenubar.h \
@@ -93,6 +97,7 @@ INCLUDEPATH += \
     SWidgets/SToolBox \
     SWidgets/STabWidget \
     SWidgets/SGraphicsView \
+    SWidgets/SOpenProcessor \
     DiagramItems/DiagramWindows \
     DiagramItems/DiagramItem \
     DiagramItems/DiagramArrow \

@@ -26,10 +26,11 @@ void BlocksLibrary::loadBlocksFromFiles( const QString& folder )
     QVector<QString> files;
     for ( int i = 0; i < list.size(); i++ )
     {
-        if ( list.at( i ).fileName() == "." || list.at( i ).fileName() == ".." )
+        if ( list.at( i ).fileName() == "."
+            || list.at( i ).fileName() == ".." )
             continue;
 
-        if ( list.at( i ).isFile() )
+        if ( list.at( i ).isFile() && ( list.at( i ).suffix() == DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) || list.at( i ).suffix() == "json" ) )
         {
             files.push_back( list.at( i ).absoluteFilePath() );
         }
@@ -40,7 +41,7 @@ void BlocksLibrary::loadBlocksFromFiles( const QString& folder )
             QFileInfoList lst = dir.entryInfoList();
             for ( int j = 0; j < lst.size(); j++ )
             {
-                if ( lst.at( j ).isFile() )
+                if ( lst.at( j ).isFile() && ( lst.at( j ).suffix() == DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) || lst.at( j ).suffix() == "json" ) )
                 {
                     files.push_back( lst.at( j ).absoluteFilePath() );
                 }
@@ -79,25 +80,7 @@ void BlocksLibrary::addBlocks( const QVector<DiagramItemSettings*>& settings_lis
         addBlock( settings );
     }
 }
-/*
-void BlocksLibrary::addBlock( DiagramItem* item )
-{
-    library.insert( item, getMode( item ) );
-}
 
-void BlocksLibrary::addBlocks( QVector<DiagramItem*>& items )
-{
-    for ( auto item : items )
-    {
-        addBlock( item );
-    }
-}
-
-void BlocksLibrary::deleteBlock( DiagramItem* item )
-{
-    library.remove( item );
-}
-*/
 void BlocksLibrary::deleteBlocks( int modes_blocks )
 {
     auto block_list = getBlocks( modes_blocks );
@@ -179,23 +162,3 @@ BlocksLibrary::ModeBlocks BlocksLibrary::getMode( DiagramItemSettings* settings 
         break;
     }
 }
-/*
-BlocksLibrary::ModeBlocks BlocksLibrary::getMode( DiagramItem* item )
-{
-    switch ( item->type() )
-    {
-    case DiagramItemBased:
-        return Based;
-        break;
-    // case DiagramItemComposite:
-    //     return Composite
-    //     break;
-    // case DiagramItemSparql:
-    //     return Composite
-    //     break;
-    default:
-        return Fail;
-        break;
-    }
-}
-*/

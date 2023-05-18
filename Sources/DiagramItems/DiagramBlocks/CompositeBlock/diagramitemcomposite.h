@@ -19,10 +19,10 @@ public:
     CompositeBlockSettings* getSettings() override;
     QString getScript() override;
     void setSettings( CompositeBlockSettings* );
-    DiagramItemIO* getInputBlock( QString& name );
-    DiagramItemIO* getOutputBlock( QString& name );
-    QVector<DiagramArrow*> getArrowForInputBlock( QString& name );
-    QVector<DiagramArrow*> getArrowForOutputBlock( QString& name );
+    DiagramItemIO* getInputBlock( const QString& name );
+    DiagramItemIO* getOutputBlock( const QString& name );
+    QVector<DiagramArrow*> getArrowForInputBlock( const QString& name );
+    QVector<DiagramArrow*> getArrowForOutputBlock( const QString& name );
 
 private:
     CompositeBlockSettings* settings;

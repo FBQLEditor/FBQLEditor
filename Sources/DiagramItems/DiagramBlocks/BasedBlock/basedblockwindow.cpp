@@ -15,6 +15,9 @@ BasedBlockWindow::BasedBlockWindow( const BasedMode& mode, QWidget* parent )
 {
     setMode( mode );
     createWidget();
+    BasedBlockSettings* settings = new BasedBlockSettings();
+    setSettings( settings );
+    delete settings;
 }
 
 void BasedBlockWindow::setMode( const BasedMode& mode )
@@ -61,7 +64,6 @@ void BasedBlockWindow::createWidget()
 
     QPushButton* button_info = new QPushButton( tr( "Info" ), this );
     QPushButton* button_save = new QPushButton( tr( "Save" ), this );
-    QPushButton* button_save_as = new QPushButton( tr( "Save as" ), this );
     QPushButton* button_open = new QPushButton( tr( "Open" ), this );
     QPushButton* button_test_script = new QPushButton( tr( "Test Script" ), this );
     QPushButton* button_set_image = new QPushButton( tr( "Set Image" ), this );
@@ -69,17 +71,15 @@ void BasedBlockWindow::createWidget()
     connect( button_info, SIGNAL( clicked() ),
         this, SLOT( slotInfo() ) );
     connect( button_save, SIGNAL( clicked() ),
-        this, SLOT( slotSave() ) );
+        this, SLOT( slotOnSaveButtonClicked() ) );
     connect( button_open, SIGNAL( clicked() ),
-        this, SLOT( slotOpen() ) );
+        this, SLOT( slotOnOpenButtonClicked() ) );
     connect( button_test_script, SIGNAL( clicked() ),
         this, SLOT( slotTestScript() ) );
     connect( button_set_image, SIGNAL( clicked() ),
         this, SLOT( slotSetImage() ) );
     connect( button_delete_image, SIGNAL( clicked() ),
         this, SLOT( slotDeleteImage() ) );
-    connect( button_save_as, SIGNAL( clicked() ),
-        this, SLOT( slotSaveAs() ) );
 
     line_name = new QLineEdit( this );
     line_line_edit = new QLineEdit( this );
@@ -98,9 +98,8 @@ void BasedBlockWindow::createWidget()
     gridLayout->addWidget( label_pixmap, 0, 4, 3, 1 );
 
     gridLayout->addWidget( button_info, 6, 3, 1, 1 );
-    gridLayout->addWidget( button_save_as, 8, 4, 1, 1 );
-    gridLayout->addWidget( button_save, 8, 3, 1, 1 );
-    gridLayout->addWidget( button_open, 8, 2, 1, 1 );
+    gridLayout->addWidget( button_save, 8, 4, 1, 1 );
+    gridLayout->addWidget( button_open, 8, 3, 1, 1 );
     gridLayout->addWidget( button_test_script, 6, 4, 1, 1 );
     gridLayout->addWidget( button_set_image, 1, 3, 1, 1 );
     gridLayout->addWidget( button_delete_image, 2, 3, 1, 1 );
@@ -118,54 +117,21 @@ void BasedBlockWindow::slotInfo()
 {
 }
 
-void BasedBlockWindow::slotSave()
+void BasedBlockWindow::slotOnSaveButtonClicked()
 {
+    QJsonDocument json;
+    BasedBlockSettings* settings = getSettings();
+    json.setObject( settings->getJsonFromSetting() );
+    saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
+    delete settings;
 }
 
-void BasedBlockWindow::slotSaveAs()
+void BasedBlockWindow::slotOnOpenButtonClicked()
 {
-    QString file_name = QFileDialog::getSaveFileName( this, "Save as", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QStringList list = file_name.split( "." );
-    if ( list.size() == 1 || list.back() != "json" )
-    {
-        file_name += ".json";
-    }
-
-    QFile file( file_name );
-    if ( file.open( QIODevice::WriteOnly ) )
-    {
-        QJsonDocument json;
-        BasedBlockSettings* settings = getSettings();
-        json.setObject( settings->getJsonFromSetting() );
-        file.write( json.toJson() );
-        delete settings;
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Block is saved!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed save block!" ) );
-    }
-    file.close();
-}
-
-void BasedBlockWindow::slotOpen()
-{
-    QString file_name = QFileDialog::getOpenFileName( this, "Choose File", QDir::currentPath(), tr( "JSON (*.json);;All files (*)" ) );
-    QFile file( file_name );
-    if ( file.open( QIODevice::ReadOnly ) )
-    {
-        BasedBlockSettings* settings = new BasedBlockSettings();
-        settings->setSettingFromString( file.readAll() );
-        slotSetName( getName( file_name ) );
-        setSettings( settings );
-        delete settings;
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Block is open!" ) );
-    }
-    else
-    {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed open block!" ) );
-    }
-    file.close();
+    BasedBlockSettings* settings = new BasedBlockSettings();
+    settings->setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) ) );
+    setSettings( settings );
+    delete settings;
 }
 
 void BasedBlockWindow::slotTestScript()

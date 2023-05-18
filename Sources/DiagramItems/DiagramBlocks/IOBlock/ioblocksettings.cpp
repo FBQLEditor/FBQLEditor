@@ -7,9 +7,18 @@ IOBlockSettings::IOBlockSettings()
 {
 }
 
-void IOBlockSettings::setSettingFromJson( const QJsonObject& object )
+bool IOBlockSettings::CheckSettings( const QJsonObject& object )
 {
     if ( object["Header"]["Type"].toString() == "IO" )
+    {
+        return true;
+    }
+    return false;
+}
+
+void IOBlockSettings::setSettingFromJson( const QJsonObject& object )
+{
+    if ( CheckSettings( object ) )
     {
         QJsonValue header = object["Header"];
         QJsonValue body = object["Body"];

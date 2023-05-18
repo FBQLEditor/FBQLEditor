@@ -2,6 +2,7 @@
 #define DIAGRAMITEMSETTINGS_H
 
 #include <QJsonValue>
+#include <QMap>
 #include <QPixmap>
 #include <QString>
 
@@ -19,6 +20,15 @@ public:
         ProjectWindowSettingsType = 12
     };
     virtual int typeSettings() const { return DiagramItemSettingsType; }
+
+    enum FileFormat
+    {
+        ProjectFileFormat,
+        BlockFileFormat,
+        MainSettingsFileFormat
+    };
+
+    static QString getFileFormat( FileFormat format );
 
     DiagramItemSettings();
 

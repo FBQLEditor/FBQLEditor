@@ -4,9 +4,6 @@
 #include <QJsonObject>
 
 #include <diagramitembased.h>
-#include <projectwindowsettings.h>
-
-#include <diagramitembased.h>
 #include <diagramitemcomposite.h>
 #include <diagramitemio.h>
 
@@ -55,59 +52,8 @@ QVector<DiagramArrow*> ProjectWindow::getDiagramArrows()
     return result;
 }
 
-void ProjectWindow::saveProject()
+void ProjectWindow::setSettings( const ProjectWindowSettings& settings )
 {
-    ProjectWindowSettings settings;
-    auto item_list = getDiagramItems();
-    auto arrow_list = getDiagramArrows();
-
-    QVector<DiagramItem*> blocks_list;
-    for ( auto& item : item_list )
-    {
-        if ( DiagramItem::IOItemType != item->type() )
-        {
-            auto setting = item->getSettings();
-            if ( setting != nullptr )
-                settings.blocks_list.push_back( setting );
-            blocks_list.push_back( item );
-        }
-    }
-
-    for ( auto& arrow : arrow_list )
-    {
-        ProjectWindowSettings::LineSaver line_saver;
-        line_saver.start_block = blocks_list.indexOf( arrow->startItem() );
-        line_saver.end_block = blocks_list.indexOf( arrow->endItem() );
-
-        if ( DiagramItem::IOItemType == arrow->startItem()->type() )
-        {
-            if ( arrow->endItem() == arrow->startItem()->parentItem() )
-                continue;
-            line_saver.start_block = blocks_list.indexOf( static_cast<DiagramItem*>( arrow->startItem()->parentItem() ) );
-            line_saver.text_start = ( static_cast<DiagramItemIO*>( arrow->startItem() ) )->getName();
-        }
-
-        if ( DiagramItem::IOItemType == arrow->endItem()->type() )
-        {
-            if ( arrow->startItem() == arrow->endItem()->parentItem() )
-                continue;
-            line_saver.end_block = blocks_list.indexOf( static_cast<DiagramItem*>( arrow->endItem()->parentItem() ) );
-            line_saver.text_end = ( static_cast<DiagramItemIO*>( arrow->endItem() ) )->getName();
-        }
-
-        settings.lines_list.push_back( line_saver );
-    }
-
-    QJsonDocument json;
-    json.setObject( settings.getJsonFromSetting() );
-    saveFile( json.toJson() );
-}
-
-void ProjectWindow::openProject()
-{
-    ProjectWindowSettings settings;
-    settings.setSettingFromString( openFile() );
-
     QVector<DiagramItem*> blocks_list;
     for ( auto& block : settings.blocks_list )
     {
@@ -149,4 +95,63 @@ void ProjectWindow::openProject()
 
         getScene()->createArrow( startItem, endItem );
     }
+}
+
+ProjectWindowSettings ProjectWindow::getSettings()
+{
+    ProjectWindowSettings settings;
+    auto item_list = getDiagramItems();
+    auto arrow_list = getDiagramArrows();
+
+    QVector<DiagramItem*> blocks_list;
+    for ( auto& item : item_list )
+    {
+        if ( DiagramItem::IOItemType != item->type() )
+        {
+            auto setting = item->getSettings();
+            if ( setting != nullptr )
+                settings.blocks_list.push_back( setting );
+            blocks_list.push_back( item );
+        }
+    }
+
+    for ( auto& arrow : arrow_list )
+    {
+        ProjectWindowSettings::LineSaver line_saver;
+        line_saver.start_block = blocks_list.indexOf( arrow->startItem() );
+        line_saver.end_block = blocks_list.indexOf( arrow->endItem() );
+
+        if ( DiagramItem::IOItemType == arrow->startItem()->type() )
+        {
+            if ( arrow->endItem() == arrow->startItem()->parentItem() )
+                continue;
+            line_saver.start_block = blocks_list.indexOf( static_cast<DiagramItem*>( arrow->startItem()->parentItem() ) );
+            line_saver.text_start = ( static_cast<DiagramItemIO*>( arrow->startItem() ) )->getName();
+        }
+
+        if ( DiagramItem::IOItemType == arrow->endItem()->type() )
+        {
+            if ( arrow->startItem() == arrow->endItem()->parentItem() )
+                continue;
+            line_saver.end_block = blocks_list.indexOf( static_cast<DiagramItem*>( arrow->endItem()->parentItem() ) );
+            line_saver.text_end = ( static_cast<DiagramItemIO*>( arrow->endItem() ) )->getName();
+        }
+
+        settings.lines_list.push_back( line_saver );
+    }
+    return settings;
+}
+
+void ProjectWindow::slotOnSaveButtonClicked()
+{
+    QJsonDocument json;
+    json.setObject( getSettings().getJsonFromSetting() );
+    saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::ProjectFileFormat ) );
+}
+
+void ProjectWindow::slotOnOpenButtonClicked()
+{
+    ProjectWindowSettings settings;
+    settings.setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::ProjectFileFormat ) ) );
+    setSettings( settings );
 }

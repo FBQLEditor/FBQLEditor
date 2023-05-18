@@ -71,7 +71,8 @@ void STabWidget::itemForAdd( DiagramItemSettings* settings )
 
 QVector<DiagramItem*> STabWidget::getBlocksForRun()
 {
-    if ( SWidget::SGraphicsViewType == currentSWidget()->typeSWidget()
+    if ( nullptr != currentSWidget()
+        && SWidget::SGraphicsViewType == currentSWidget()->typeSWidget()
         && SGraphicsView::ProjectWindowType == ( static_cast<SGraphicsView*>( currentSWidget() ) )->typeSGView() )
     {
         auto window = static_cast<ProjectWindow*>( currentWidget() );
@@ -98,20 +99,10 @@ void STabWidget::deleteItemOnScene()
     }
 }
 
-void STabWidget::saveProject()
+void STabWidget::callSaveCurrentWidget()
 {
-    auto widget = currentSWidget();
-    if ( nullptr != widget )
+    if ( nullptr != currentSWidget() )
     {
-        widget->saveProject();
-    }
-}
-
-void STabWidget::openProject()
-{
-    auto widget = currentSWidget();
-    if ( nullptr != widget )
-    {
-        widget->openProject();
+        currentSWidget()->slotOnSaveButtonClicked();
     }
 }

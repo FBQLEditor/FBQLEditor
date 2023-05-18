@@ -29,6 +29,8 @@ public:
     QJsonObject getJsonFromSetting() override;
 
     QJsonArray getJsonArrayFromLineSaver( const QVector<LineSaver>& lines );
+
+    static bool CheckSettings( const QJsonObject& object );
 };
 
 #endif // PROJECTWINDOWSETTINGS_H

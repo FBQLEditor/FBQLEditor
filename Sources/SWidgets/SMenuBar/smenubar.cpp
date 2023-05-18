@@ -12,6 +12,12 @@ void SMenuBar::CreateActions()
     connect( this, SIGNAL( createItemMenu( QMenu* ) ),
         parent(), SLOT( setItemMenu( QMenu* ) ) );
 
+    main_page = new QAction( QIcon( ":/Sources/images/icon.png" ), tr( "Main page" ), this );
+    main_page->setShortcut( tr( "Ctrl+M" ) );
+    main_page->setStatusTip( tr( "Open Main Page" ) );
+    connect( main_page, SIGNAL( triggered() ),
+        parent(), SLOT( slotOnOpenMainPage() ) );
+
     toFrontAction = new QAction( QIcon( ":/Sources/images/bringtofront.png" ),
         tr( "Bring to &Front" ), this );
     toFrontAction->setShortcut( tr( "Ctrl+F" ) );

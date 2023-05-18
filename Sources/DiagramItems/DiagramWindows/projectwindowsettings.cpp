@@ -17,6 +17,15 @@ ProjectWindowSettings::~ProjectWindowSettings()
     clear();
 }
 
+bool ProjectWindowSettings::CheckSettings( const QJsonObject& object )
+{
+    if ( object["Header"]["Type"].toString() == "Project" )
+    {
+        return true;
+    }
+    return false;
+}
+
 QJsonArray ProjectWindowSettings::getJsonArrayFromLineSaver( const QVector<LineSaver>& lines )
 {
     QJsonArray lines_array;
@@ -34,7 +43,7 @@ QJsonArray ProjectWindowSettings::getJsonArrayFromLineSaver( const QVector<LineS
 
 void ProjectWindowSettings::setSettingFromJson( const QJsonObject& object )
 {
-    if ( object["Header"]["Type"].toString() == "Project" )
+    if ( CheckSettings( object ) )
     {
         QJsonObject header = object["Header"].toObject();
         QJsonObject body = object["Body"].toObject();

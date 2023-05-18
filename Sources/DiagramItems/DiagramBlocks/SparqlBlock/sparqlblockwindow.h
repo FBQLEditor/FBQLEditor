@@ -10,6 +10,7 @@
 
 class SparqlBlockWindow : public SGraphicsView
 {
+    Q_OBJECT
 public:
     SGViewTypes typeSGView() override { return SparqlBlockWindowType; }
     int modeDiagramBlocks() override { return BlocksLibrary::ModeBlocks::Atom; }
@@ -24,7 +25,7 @@ public slots:
     void slotOnCreateButtonClicked() override;
     void slotOnSaveButtonClicked() override;
     void slotOnOpenButtonClicked() override;
-    void slotCustom() override;
+    void slotOpenQuery();
 
 private:
     QWidget* addCustomWidget() override;
@@ -35,7 +36,7 @@ private:
     void createDefaultcScene();
     void clearScene();
     bool CheckCollisionArea( DiagramItemAtom* item, DiagramItemAtom* area );
-    QTextEdit* text_edit = nullptr;
+    QTextEdit* query_edit;
 };
 
 #endif // SPARQLBLOCKWINDOW_H

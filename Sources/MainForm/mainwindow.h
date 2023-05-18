@@ -8,6 +8,7 @@
 
 #include <blockslibrary.h>
 #include <smenubar.h>
+#include <sopensaveprocessor.h>
 #include <stabwidget.h>
 #include <stoolbar.h>
 #include <stoolbox.h>
@@ -28,17 +29,19 @@ public:
     ~MainWindow();
 
 public slots:
+    void slotOnOpenMainPage();
     void slotCreateNewProject();
     void slotOnOpenProject();
     void slotOnSaveProject();
     void slotCreateBasedBlock();
     void slotCreateCompositeBlock();
     void slotCreateSparqlBlock();
-    void slotCurrentTabMode( int );
-    void slotOnCreateBlock( DiagramItemSettings* );
     void slotOnClickedBlockExecutor();
     void slotOnDeleteItemOnScene();
     void slotOnSettingFusekiServer();
+
+    void slotCurrentTabMode( int );
+    void slotOnCreateBlock( DiagramItemSettings* );
     void setItemMenu( QMenu* );
 
 private:
@@ -53,6 +56,7 @@ private:
     SToolBar* tool_bar;
     SToolBox* tool_box;
     STabWidget* tab_widget;
+    SOpenSaveProcessor* open_save_processor;
 
     BlocksLibrary* library;
 };

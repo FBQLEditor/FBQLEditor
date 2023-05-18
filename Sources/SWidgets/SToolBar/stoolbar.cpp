@@ -6,11 +6,15 @@
 SToolBar::SToolBar( SMenuBar& menubar, QWidget* parent )
     : QToolBar( parent )
 {
+    setMovable( false );
     CreateToolBar( menubar );
 }
 
 void SToolBar::CreateToolBar( SMenuBar& menubar )
 {
+    addAction( menubar.main_page );
+
+    addSeparator();
     addAction( menubar.createNewProjectAction );
     addAction( menubar.openProjectAction );
     addAction( menubar.saveProjectAction );
