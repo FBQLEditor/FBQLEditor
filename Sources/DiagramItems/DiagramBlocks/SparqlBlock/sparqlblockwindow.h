@@ -22,7 +22,7 @@ public:
     SparqlBlockSettings* getSettings();
 
 public slots:
-    void slotOnCreateButtonClicked() override;
+    // void slotOnCreateButtonClicked() override;
     void slotOnSaveButtonClicked() override;
     void slotOnOpenButtonClicked() override;
     void slotOpenQuery();

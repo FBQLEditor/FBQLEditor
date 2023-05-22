@@ -37,8 +37,8 @@ QWidget* CompositeBlockWindow::addCustomBotWidget()
     QGridLayout* grid_layout = new QGridLayout();
     widget->setLayout( grid_layout );
 
-    QPushButton* button_create_block = new QPushButton( tr( "Create" ), this );
-    connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
+    // QPushButton* button_create_block = new QPushButton( tr( "Create" ), this );
+    // connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
 
     QPushButton* button_save_block = new QPushButton( tr( "Save" ), this );
     connect( button_save_block, SIGNAL( clicked() ), this, SLOT( slotOnSaveButtonClicked() ) );
@@ -46,16 +46,16 @@ QWidget* CompositeBlockWindow::addCustomBotWidget()
     QPushButton* button_open_block = new QPushButton( tr( "Open" ), this );
     connect( button_open_block, SIGNAL( clicked() ), this, SLOT( slotOnOpenButtonClicked() ) );
 
-    grid_layout->addWidget( button_create_block, 0, 0 );
+    // grid_layout->addWidget( button_create_block, 0, 0 );
     grid_layout->addWidget( button_save_block, 1, 0 );
     grid_layout->addWidget( button_open_block, 2, 0 );
     return widget;
 }
 
-void CompositeBlockWindow::slotOnCreateButtonClicked()
-{
-    emit blockCreated( getSettings() );
-}
+// void CompositeBlockWindow::slotOnCreateButtonClicked()
+//{
+//     emit blockCreated( getSettings() );
+// }
 
 void CompositeBlockWindow::slotOnSaveButtonClicked()
 {
@@ -63,7 +63,7 @@ void CompositeBlockWindow::slotOnSaveButtonClicked()
     QJsonDocument json;
     json.setObject( settings->getJsonFromSetting() );
     saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
-    delete settings;
+    emit blockCreated( settings );
 }
 
 void CompositeBlockWindow::slotOnOpenButtonClicked()

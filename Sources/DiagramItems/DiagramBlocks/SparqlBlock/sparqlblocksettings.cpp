@@ -192,8 +192,8 @@ QString SparqlBlockSettings::getScript()
 {
     MainSettingsMaster master( "Fuseki" );
     auto dataset_name = master.getSettings<QString>( "dataset_name" );
-    auto fuseki_ip = master.getSettings<QString>( "fuseki_ip" );
-    auto fuseki_port = master.getSettings<QString>( "fuseki_port" );
+    auto fuseki_ip = master.getSettings<QString>( "ip" );
+    auto fuseki_port = master.getSettings<QString>( "port" );
 
     if ( dataset_name.isEmpty() )
     {
@@ -213,7 +213,7 @@ QString SparqlBlockSettings::getScript()
     script += "\"query=" + QUrl::toPercentEncoding( query.isEmpty() ? getQuery() : query ) + "\");\n";
     script += "json_obj = JSON.parse( answer );\n"
               "array = json_obj.results.bindings;\n"
-              "y.push( array.length );";
+              "output = array.length;";
 
     return script;
 }

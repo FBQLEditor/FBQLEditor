@@ -2,7 +2,7 @@
 #define SPARQLBLOCKSETTINGS_H
 
 #include <atomblocksettings.h>
-#include <basedblocksettings.h>
+#include <basicblocksettings.h>
 #include <mainsettings.h>
 
 class SparqlBlockSettings : public DiagramItemSettings

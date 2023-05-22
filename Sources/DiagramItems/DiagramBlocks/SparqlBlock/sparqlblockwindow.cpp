@@ -3,6 +3,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMap>
+#include <QMessageBox>
 #include <QPushButton>
 
 #include <diagramarrow.h>
@@ -14,6 +15,7 @@ SparqlBlockWindow::SparqlBlockWindow( QMenu* context_menu, QWidget* parent )
     setSettings( SparqlBlockSettings::CreateTemplateSparqlSettings() );
 
     query_edit = new QTextEdit( this );
+    query_edit->setReadOnly( true );
     getStackedWidget()->insertWidget( getStackedWidget()->count(), query_edit );
 }
 
@@ -50,8 +52,8 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     QGridLayout* grid_layout = new QGridLayout();
     widget->setLayout( grid_layout );
 
-    QPushButton* button_create_block = new QPushButton( "Create", this );
-    connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
+    // QPushButton* button_create_block = new QPushButton( "Create", this );
+    // connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
 
     QPushButton* button_save_block = new QPushButton( "Save", this );
     connect( button_save_block, SIGNAL( clicked() ), this, SLOT( slotOnSaveButtonClicked() ) );
@@ -63,7 +65,7 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     connect( button_write_query, SIGNAL( clicked() ), this, SLOT( slotOpenQuery() ) );
 
     grid_layout->addWidget( button_write_query, 0, 0 );
-    grid_layout->addWidget( button_create_block, 1, 0 );
+    // grid_layout->addWidget( button_create_block, 1, 0 );
     grid_layout->addWidget( button_save_block, 2, 0 );
     grid_layout->addWidget( button_open_block, 3, 0 );
 
@@ -85,18 +87,33 @@ void SparqlBlockWindow::slotOpenQuery()
     }
 }
 
-void SparqlBlockWindow::slotOnCreateButtonClicked()
-{
-    emit blockCreated( getSettings() );
-}
+// void SparqlBlockWindow::slotOnCreateButtonClicked()
+//{
+//     emit blockCreated( getSettings() );
+// }
 
 void SparqlBlockWindow::slotOnSaveButtonClicked()
 {
+    /*QMessageBox msgBox;
+    msgBox.setMinimumWidth( 400 );
+    msgBox.setText( "What should be taken as the basis of the request?" );
+    msgBox.setStandardButtons( QMessageBox::Yes | QMessageBox::No );
+    msgBox.button( QMessageBox::Yes )->setIcon( QIcon() );
+    msgBox.button( QMessageBox::No )->setIcon( QIcon() );
+    msgBox.button( QMessageBox::Yes )->setText( "Text request" );
+    msgBox.button( QMessageBox::No )->setText( "Diagram" );
+    msgBox.setDefaultButton( QMessageBox::No );
+    int result = msgBox.exec();
+
+    if ( QMessageBox::Yes == result )
+    {
+    }*/
+
     auto settings = getSettings();
     QJsonDocument json;
     json.setObject( settings->getJsonFromSetting() );
     saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
-    delete settings;
+    emit blockCreated( settings );
 }
 
 void SparqlBlockWindow::slotOnOpenButtonClicked()
@@ -259,7 +276,7 @@ SparqlBlockSettings* SparqlBlockWindow::getSettings()
 void SparqlBlockWindow::createDefaultcScene()
 {
     clearScene();
-    auto atom_list = AtomBlockSettings::GetBasedAtomBlocks();
+    auto atom_list = AtomBlockSettings::GetBasicAtomBlocks();
 }
 
 void SparqlBlockWindow::clearScene()

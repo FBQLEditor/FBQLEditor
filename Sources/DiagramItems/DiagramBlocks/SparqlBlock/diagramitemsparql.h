@@ -4,7 +4,7 @@
 #include <QGraphicsProxyWidget>
 #include <QLabel>
 
-#include <diagramitembased.h>
+#include <diagramitembasic.h>
 #include <sparqlblocksettings.h>
 
 class DiagramItemSparql : public DiagramItem

@@ -31,9 +31,9 @@ public:
 public slots:
     void slotOnOpenMainPage();
     void slotCreateNewProject();
-    void slotOnOpenProject();
-    void slotOnSaveProject();
-    void slotCreateBasedBlock();
+    void slotOnOpen();
+    void slotOnSave();
+    void slotCreateBasicBlock();
     void slotCreateCompositeBlock();
     void slotCreateSparqlBlock();
     void slotOnClickedBlockExecutor();

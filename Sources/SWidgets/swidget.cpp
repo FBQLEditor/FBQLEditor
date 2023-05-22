@@ -19,11 +19,11 @@ QString SWidget::openFile( const QString& format )
     {
         result = file.readAll();
         emit setTabName( QFileInfo( file.fileName() ).fileName() );
-        //  QMessageBox::about( this, tr( "Based Block" ), tr( "Block is open!" ) );
+        //  QMessageBox::about( this, tr( "Basic Block" ), tr( "Block is open!" ) );
     }
     else
     {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed open block!" ) );
+        QMessageBox::about( this, tr( "Basic Block" ), tr( "Failed open block!" ) );
     }
     file.close();
     return result;
@@ -42,11 +42,11 @@ void SWidget::saveFile( const QString& text, const QString& format )
     if ( file.open( QIODevice::WriteOnly ) )
     {
         file.write( text.toLatin1() );
-        // QMessageBox::about( this, tr( "Based Block" ), tr( "Block is saved!" ) );
+        // QMessageBox::about( this, tr( "Basic Block" ), tr( "Block is saved!" ) );
     }
     else
     {
-        QMessageBox::about( this, tr( "Based Block" ), tr( "Failed save block!" ) );
+        QMessageBox::about( this, tr( "Basic Block" ), tr( "Failed save block!" ) );
     }
     file.close();
 }

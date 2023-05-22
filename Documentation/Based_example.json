@@ -15,7 +15,7 @@
         "Image": "..."
     },
     "Header": {
-        "Name": "BasedBlock",
-        "Type": "Based"
+        "Name": "BasicBlock",
+        "Type": "Basic"
     }
 }

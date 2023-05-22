@@ -33,9 +33,9 @@ private:
     void paint();
 
 private slots:
-    void
-    execute();
+    void execute();
     void logs_sniff( QStringList );
+    void errorNetwork( const QString& );
 
 private:
     QVector<DiagramItem*> items_for_run;

@@ -32,7 +32,7 @@ public:
     void setType( TypeIO type );
 
     static bool CheckSettings( const QJsonObject& object );
-    static QVector<DiagramItemSettings*> GetBasedIOBlocks();
+    static QVector<DiagramItemSettings*> GetBasicIOBlocks();
 };
 
 #endif // IOBLOCKSETTINGS_H

@@ -33,12 +33,12 @@ public:
     QAction* deleteAction;
     QAction* reworkBlockAction;
     QAction* runSceneScriptAction;
-    QAction* createBasedBlockAction;
+    QAction* createBasicBlockAction;
     QAction* createCompositeBlockAction;
     QAction* createSparqlBlockAction;
     QAction* createNewProjectAction;
-    QAction* openProjectAction;
-    QAction* saveProjectAction;
+    QAction* openAction;
+    QAction* saveAction;
 
     QAction* settingFusekiServer;
 };

@@ -3,7 +3,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include <diagramitembased.h>
+#include <diagramitembasic.h>
 #include <diagramitemcomposite.h>
 #include <diagramitemio.h>
 

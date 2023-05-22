@@ -9,7 +9,7 @@ class CompositeBlockWindow : public SGraphicsView
 {
 public:
     SGViewTypes typeSGView() override { return CompositeBlockWindowType; }
-    int modeDiagramBlocks() override { return BlocksLibrary::ModeBlocks::Based
+    int modeDiagramBlocks() override { return BlocksLibrary::ModeBlocks::Basic
         | BlocksLibrary::ModeBlocks::Composite
         | BlocksLibrary::ModeBlocks::SPARQL
         | BlocksLibrary::ModeBlocks::IO; }
@@ -22,7 +22,7 @@ public:
     QVector<DiagramArrow*> getDiagramArrows();
 
 public slots:
-    void slotOnCreateButtonClicked() override;
+    // void slotOnCreateButtonClicked() override;
     void slotOnSaveButtonClicked() override;
     void slotOnOpenButtonClicked() override;
 

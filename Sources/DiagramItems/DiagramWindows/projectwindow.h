@@ -9,7 +9,7 @@ class ProjectWindow : public SGraphicsView
     Q_OBJECT
 public:
     SGViewTypes typeSGView() override { return ProjectWindowType; }
-    int modeDiagramBlocks() override { return BlocksLibrary::ModeBlocks::Based
+    int modeDiagramBlocks() override { return BlocksLibrary::ModeBlocks::Basic
         | BlocksLibrary::ModeBlocks::Composite
         | BlocksLibrary::ModeBlocks::SPARQL; }
 

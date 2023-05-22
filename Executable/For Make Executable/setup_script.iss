@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FBQL Editor"
-#define MyAppVersion "0.6"
+#define MyAppVersion "0.7"
 #define MyAppExeName "SPARQL.exe"
 #define MyAppPublisher "FBQL Editor"
 #define MyAppURL "https://github.com/FBQLEditor/FBQLEditor"
@@ -24,7 +24,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 OutputDir=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Executable\latest
 OutputBaseFilename=FBQL Editor Setup
-SetupIconFile=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Sources\icon.ico
+;SetupIconFile=C:\Users\GrumpyMonk\Documents\GitHub\FBQLEditor\Sources\icon.ico
 ChangesAssociations=yes
 Compression=lzma
 SolidCompression=yes

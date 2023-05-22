@@ -59,9 +59,15 @@ void delay( int millisecondsToWait )
 
 QString SNetwork::waitAnswer()
 {
-    while ( answerflag == "" )
+    int waitTime = 3000;
+    while ( answerflag == "" && waitTime )
     {
         delay( 100 );
+        waitTime -= 100;
+    }
+    if ( !waitTime )
+    {
+        emit ERROR( "Server timeout error!" );
     }
     QString result = answerflag;
     answerflag = "";
