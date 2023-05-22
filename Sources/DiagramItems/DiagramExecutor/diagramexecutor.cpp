@@ -24,7 +24,13 @@ DiagramExecutor::DiagramExecutor( QWidget* parent )
     createWindow();
 
     network_api = new SNetwork( this );
+    connect( network_api, SIGNAL( ERROR( QString ) ), this, SLOT( errorNetwork( QString ) ) );
     api = new ApiJS( this );
+}
+
+void DiagramExecutor::errorNetwork( const QString& error_message )
+{
+    text_edit_output->setText( error_message );
 }
 
 BlocksExec* DiagramExecutor::createBlocksExecObject( DiagramItemSettings* settings )

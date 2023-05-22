@@ -19,6 +19,9 @@ public slots:
     QString waitAnswer();
     void getResponse( QNetworkReply* );
 
+signals:
+    void ERROR( QString );
+
 private:
     QUrl url;
 
