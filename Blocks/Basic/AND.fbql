@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "AND",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

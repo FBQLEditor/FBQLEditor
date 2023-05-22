@@ -1,7 +1,7 @@
-#ifndef DIAGRAMITEMBASED_H
-#define DIAGRAMITEMBASED_H
+#ifndef DIAGRAMITEMBASIC_H
+#define DIAGRAMITEMBASIC_H
 
-#include <basedblocksettings.h>
+#include <basicblocksettings.h>
 #include <diagramitem.h>
 
 #include <QFont>
@@ -12,15 +12,15 @@
 #include <QPainter>
 #include <QPainterPath>
 
-class DiagramItemBased : public DiagramItem
+class DiagramItemBasic : public DiagramItem
 {
 public:
-    virtual int type() const override { return BasedItemType; }
+    virtual int type() const override { return BasicItemType; }
 
-    DiagramItemBased( QMenu* contextMenu, QGraphicsItem* parent = nullptr, BasedBlockSettings* setting = new BasedBlockSettings() );
-    void setSettings( BasedBlockSettings* setting );
+    DiagramItemBasic( QMenu* contextMenu, QGraphicsItem* parent = nullptr, BasicBlockSettings* setting = new BasicBlockSettings() );
+    void setSettings( BasicBlockSettings* setting );
     QString getName();
-    BasedBlockSettings* getSettings() override;
+    BasicBlockSettings* getSettings() override;
     QString getInputData() override;
     void setDrawPicture( bool );
     QString getScript() override;
@@ -36,4 +36,4 @@ private:
     QString script;
 };
 
-#endif // DIAGRAMITEMBASED_H
+#endif // DIAGRAMITEMBASIC_H

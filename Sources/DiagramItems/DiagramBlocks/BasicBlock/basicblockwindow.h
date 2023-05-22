@@ -1,32 +1,32 @@
-#ifndef BASEDBLOCKWINDOW_H
-#define BASEDBLOCKWINDOW_H
+#ifndef BASICBLOCKWINDOW_H
+#define BASICBLOCKWINDOW_H
 
 #include <QCheckBox>
 #include <QLabel>
 #include <QLineEdit>
 #include <QTextEdit>
 
-#include <diagramitembased.h>
+#include <diagramitembasic.h>
 #include <swidget.h>
 
-class BasedBlockWindow : public SWidget
+class BasicBlockWindow : public SWidget
 {
     Q_OBJECT
 public:
-    enum BasedMode
+    enum BasicMode
     {
         CreateMode = 0,
         ReworkMode = 1
     };
-    SWidgetTypes typeSWidget() override { return BasedBlockWindowType; }
+    SWidgetTypes typeSWidget() override { return BasicBlockWindowType; }
     int modeDiagramBlocks() override { return BlocksLibrary::ModeBlocks::None; }
 
-    explicit BasedBlockWindow( const BasedMode& mode, QWidget* parent = nullptr );
+    explicit BasicBlockWindow( const BasicMode& mode, QWidget* parent = nullptr );
 
     void createWidget();
-    void setMode( const BasedMode& mode );
-    void setBlockOnRework( DiagramItemBased* item );
-    void setSettings( BasedBlockSettings* settings );
+    void setMode( const BasicMode& mode );
+    void setBlockOnRework( DiagramItemBasic* item );
+    void setSettings( BasicBlockSettings* settings );
 
     QString getName( const QString& path );
 
@@ -40,15 +40,15 @@ private slots:
     void slotDeleteImage();
     void slotSetName( const QString& name );
 
-    BasedBlockSettings* getSettings();
+    BasicBlockSettings* getSettings();
 
 signals:
     void changeNameWindow( QString );
     void error( QString );
 
 private:
-    BasedMode mode_;
-    DiagramItemBased* item_on_rework;
+    BasicMode mode_;
+    DiagramItemBasic* item_on_rework;
 
     QPixmap pixmap;
     QLabel* label_pixmap;
@@ -60,4 +60,4 @@ private:
     QTextEdit* text_edit;
 };
 
-#endif // BASEDBLOCKWINDOW_H
+#endif // BASICBLOCKWINDOW_H

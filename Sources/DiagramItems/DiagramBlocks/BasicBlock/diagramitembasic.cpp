@@ -1,6 +1,6 @@
-#include "diagramitembased.h"
+#include "diagramitembasic.h"
 
-DiagramItemBased::DiagramItemBased( QMenu* contextMenu, QGraphicsItem* parent, BasedBlockSettings* setting )
+DiagramItemBasic::DiagramItemBasic( QMenu* contextMenu, QGraphicsItem* parent, BasicBlockSettings* setting )
     : DiagramItem( contextMenu, parent )
 {
     setBrush( Qt::yellow );
@@ -30,7 +30,7 @@ DiagramItemBased::DiagramItemBased( QMenu* contextMenu, QGraphicsItem* parent, B
     setSettings( setting );
 }
 
-void DiagramItemBased::setSettings( BasedBlockSettings* setting )
+void DiagramItemBasic::setSettings( BasicBlockSettings* setting )
 {
     name->setHtml( "<span style=\"font-size: 15px; text-decoration: underline;\">" + setting->block_name + "</span>" );
     if ( setting->label )
@@ -55,19 +55,19 @@ void DiagramItemBased::setSettings( BasedBlockSettings* setting )
     picture->setPixmap( setting->pixmap.scaled( 30, 30 ) );
 }
 
-QString DiagramItemBased::getName()
+QString DiagramItemBasic::getName()
 {
     return name->toPlainText();
 }
 
-QString DiagramItemBased::getScript()
+QString DiagramItemBasic::getScript()
 {
     return script;
 }
 
-BasedBlockSettings* DiagramItemBased::getSettings()
+BasicBlockSettings* DiagramItemBasic::getSettings()
 {
-    BasedBlockSettings* settings = new BasedBlockSettings();
+    BasicBlockSettings* settings = new BasicBlockSettings();
     settings->block_name = getName();
     settings->label = label->isActive();
     settings->label_text = label->toPlainText();
@@ -79,12 +79,12 @@ BasedBlockSettings* DiagramItemBased::getSettings()
     return settings;
 }
 
-QString DiagramItemBased::getInputData()
+QString DiagramItemBasic::getInputData()
 {
     return line_edit->text();
 }
 
-void DiagramItemBased::setDrawPicture( bool flag )
+void DiagramItemBasic::setDrawPicture( bool flag )
 {
     picture->setVisible( flag );
 }

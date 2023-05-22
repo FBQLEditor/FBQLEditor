@@ -1,10 +1,10 @@
-#include "basedblocksettings.h"
+#include "basicblocksettings.h"
 
 #include <QJsonObject>
 
-BasedBlockSettings::BasedBlockSettings()
+BasicBlockSettings::BasicBlockSettings()
 {
-    block_name = "BasedBlock";
+    block_name = "BasicBlock";
     label = true;
     label_text = "label";
     line_edit = true;
@@ -14,16 +14,16 @@ BasedBlockSettings::BasedBlockSettings()
     pixmap = image();
 }
 
-bool BasedBlockSettings::CheckSettings( const QJsonObject& object )
+bool BasicBlockSettings::CheckSettings( const QJsonObject& object )
 {
-    if ( object["Header"]["Type"].toString() == "Based" )
+    if ( object["Header"]["Type"].toString() == "Basic" )
     {
         return true;
     }
     return false;
 }
 
-void BasedBlockSettings::setSettingFromJson( const QJsonObject& object )
+void BasicBlockSettings::setSettingFromJson( const QJsonObject& object )
 {
     if ( CheckSettings( object ) )
     {
@@ -44,7 +44,7 @@ void BasedBlockSettings::setSettingFromJson( const QJsonObject& object )
     }
 }
 
-QJsonObject BasedBlockSettings::getJsonFromSetting()
+QJsonObject BasicBlockSettings::getJsonFromSetting()
 {
     QJsonObject object;
 
@@ -52,7 +52,7 @@ QJsonObject BasedBlockSettings::getJsonFromSetting()
     QJsonObject body;
 
     header.insert( "Name", block_name );
-    header.insert( "Type", "Based" );
+    header.insert( "Type", "Basic" );
 
     body.insert( "Image", jsonValFromPixmap( pixmap ) );
     body.insert( "Flag_Custom_Image", flag_custom_image );
@@ -69,7 +69,7 @@ QJsonObject BasedBlockSettings::getJsonFromSetting()
     return object;
 }
 
-QPixmap BasedBlockSettings::image() const
+QPixmap BasicBlockSettings::image() const
 {
     return {};
 }

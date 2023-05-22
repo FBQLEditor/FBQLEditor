@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "NOT",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

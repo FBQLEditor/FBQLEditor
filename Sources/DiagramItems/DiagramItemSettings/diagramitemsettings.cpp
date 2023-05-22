@@ -40,7 +40,7 @@ QString DiagramItemSettings::getNameType()
     {
     case DiagramItemSettingsType:
         return "Settings";
-    case BasedItemSettingsType:
+    case BasicItemSettingsType:
         return "Basic";
     case CompositeItemSettingsType:
         return "Composite";
@@ -124,7 +124,7 @@ QPointF DiagramItemSettings::pointFromJsonObject( const QJsonValue& value )
     return QPointF( value["X"].toDouble(), value["Y"].toDouble() );
 }
 
-#include <basedblocksettings.h>
+#include <basicblocksettings.h>
 #include <compositeblocksettings.h>
 #include <ioblocksettings.h>
 #include <sparqlblocksettings.h>
@@ -132,9 +132,9 @@ QPointF DiagramItemSettings::pointFromJsonObject( const QJsonValue& value )
 DiagramItemSettings* DiagramItemSettings::getDiagramSettingsFromJson( const QJsonObject& object )
 {
     auto type_block = object["Header"]["Type"].toString();
-    if ( "Based" == type_block )
+    if ( "Basic" == type_block )
     {
-        BasedBlockSettings* settings = new BasedBlockSettings();
+        BasicBlockSettings* settings = new BasicBlockSettings();
         settings->setSettingFromJson( object );
         return settings;
     }

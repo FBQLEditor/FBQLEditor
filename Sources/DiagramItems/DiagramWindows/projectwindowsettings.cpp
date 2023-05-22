@@ -3,7 +3,7 @@
 #include <QJsonArray>
 #include <QJsonObject>
 
-#include <basedblocksettings.h>
+#include <basicblocksettings.h>
 #include <compositeblocksettings.h>
 #include <sparqlblocksettings.h>
 

@@ -1,16 +1,16 @@
-#ifndef BASEDBLOCKSETTINGS_H
-#define BASEDBLOCKSETTINGS_H
+#ifndef BASICBLOCKSETTINGS_H
+#define BASICBLOCKSETTINGS_H
 
 #include <QPixmap>
 #include <QString>
 #include <diagramitemsettings.h>
 
-class BasedBlockSettings : public DiagramItemSettings
+class BasicBlockSettings : public DiagramItemSettings
 {
 public:
-    int typeSettings() const override { return BasedItemSettingsType; };
+    int typeSettings() const override { return BasicItemSettingsType; };
 
-    BasedBlockSettings();
+    BasicBlockSettings();
 
     void setSettingFromJson( const QJsonObject& object ) override;
     QJsonObject getJsonFromSetting() override;
@@ -32,4 +32,4 @@ public:
     bool flag_custom_image;
 };
 
-#endif // BASEDBLOCKSETTINGS_H
+#endif // BASICBLOCKSETTINGS_H

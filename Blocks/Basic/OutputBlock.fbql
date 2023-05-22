@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "OutputBlock",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

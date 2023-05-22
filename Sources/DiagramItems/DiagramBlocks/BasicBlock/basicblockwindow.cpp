@@ -1,4 +1,4 @@
-#include "basedblockwindow.h"
+#include "basicblockwindow.h"
 
 #include <QFile>
 #include <QFileDialog>
@@ -10,30 +10,30 @@
 #include <QVariant>
 #include <exception>
 
-BasedBlockWindow::BasedBlockWindow( const BasedMode& mode, QWidget* parent )
+BasicBlockWindow::BasicBlockWindow( const BasicMode& mode, QWidget* parent )
     : SWidget( parent )
 {
     setMode( mode );
     createWidget();
-    BasedBlockSettings* settings = new BasedBlockSettings();
+    BasicBlockSettings* settings = new BasicBlockSettings();
     setSettings( settings );
     delete settings;
 }
 
-void BasedBlockWindow::setMode( const BasedMode& mode )
+void BasicBlockWindow::setMode( const BasicMode& mode )
 {
     mode_ = mode;
 }
 
-void BasedBlockWindow::setBlockOnRework( DiagramItemBased* item )
+void BasicBlockWindow::setBlockOnRework( DiagramItemBasic* item )
 {
     if ( ReworkMode == mode_ )
-        emit error( tr( "BasedBlockWindow, this not rework mode!" ) );
+        emit error( tr( "BasicBlockWindow, this not rework mode!" ) );
     item_on_rework = item;
     setSettings( item->getSettings() );
 }
 
-void BasedBlockWindow::setSettings( BasedBlockSettings* settings )
+void BasicBlockWindow::setSettings( BasicBlockSettings* settings )
 {
     line_name->setText( settings->block_name );
     line_label->setText( settings->label_text );
@@ -52,7 +52,7 @@ void BasedBlockWindow::setSettings( BasedBlockSettings* settings )
     label_pixmap->setPixmap( settings->pixmap.scaled( 70, 70 ) );
 }
 
-void BasedBlockWindow::createWidget()
+void BasicBlockWindow::createWidget()
 {
     QGridLayout* gridLayout = new QGridLayout( this );
 
@@ -113,47 +113,47 @@ void BasedBlockWindow::createWidget()
     gridLayout->addWidget( text_edit, 7, 1, 1, 4 );
 }
 
-void BasedBlockWindow::slotInfo()
+void BasicBlockWindow::slotInfo()
 {
 }
 
-void BasedBlockWindow::slotOnSaveButtonClicked()
+void BasicBlockWindow::slotOnSaveButtonClicked()
 {
     QJsonDocument json;
-    BasedBlockSettings* settings = getSettings();
+    BasicBlockSettings* settings = getSettings();
     json.setObject( settings->getJsonFromSetting() );
     saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
-    delete settings;
+    emit blockCreated( settings );
 }
 
-void BasedBlockWindow::slotOnOpenButtonClicked()
+void BasicBlockWindow::slotOnOpenButtonClicked()
 {
-    BasedBlockSettings* settings = new BasedBlockSettings();
+    BasicBlockSettings* settings = new BasicBlockSettings();
     settings->setSettingFromString( openFile( DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) ) );
     setSettings( settings );
     delete settings;
 }
 
-void BasedBlockWindow::slotTestScript()
+void BasicBlockWindow::slotTestScript()
 {
 }
 
-void BasedBlockWindow::slotSetImage()
+void BasicBlockWindow::slotSetImage()
 {
 }
 
-void BasedBlockWindow::slotDeleteImage()
+void BasicBlockWindow::slotDeleteImage()
 {
 }
 
-void BasedBlockWindow::slotSetName( const QString& name )
+void BasicBlockWindow::slotSetName( const QString& name )
 {
     emit changeNameWindow( name );
 }
 
-BasedBlockSettings* BasedBlockWindow::getSettings()
+BasicBlockSettings* BasicBlockWindow::getSettings()
 {
-    BasedBlockSettings* settings = new BasedBlockSettings();
+    BasicBlockSettings* settings = new BasicBlockSettings();
     settings->block_name = line_name->text();
     settings->label = check_label->isChecked();
     settings->line_edit = check_line_edit->isChecked();
@@ -164,7 +164,7 @@ BasedBlockSettings* BasedBlockWindow::getSettings()
     return settings;
 }
 
-QString BasedBlockWindow::getName( const QString& path )
+QString BasicBlockWindow::getName( const QString& path )
 {
     QStringList lst = path.split( "/" );
     return lst.at( lst.size() - 1 );

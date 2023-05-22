@@ -20,7 +20,7 @@ public:
     enum ModeBlocks
     {
         None = 0,
-        Based = 1,
+        Basic = 1,
         Composite = 2,
         SPARQL = 4,
         Atom = 8,

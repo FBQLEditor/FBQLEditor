@@ -12,7 +12,7 @@ public:
     enum
     {
         DiagramItemSettingsType = 0,
-        BasedItemSettingsType = 2,
+        BasicItemSettingsType = 2,
         CompositeItemSettingsType = 4,
         SparqlItemSettinsType = 6,
         AtomItemSettingsType = 8,

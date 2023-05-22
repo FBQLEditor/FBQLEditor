@@ -43,23 +43,23 @@ void SMenuBar::CreateActions()
     connect( createNewProjectAction, SIGNAL( triggered() ),
         parent(), SLOT( slotCreateNewProject() ) );
 
-    openProjectAction = new QAction( QIcon( ":/Sources/images/open.png" ), tr( "Open project" ), this );
-    openProjectAction->setShortcut( tr( "Ctrl+O" ) );
-    openProjectAction->setStatusTip( tr( "Open Project" ) );
-    connect( openProjectAction, SIGNAL( triggered() ),
-        parent(), SLOT( slotOnOpenProject() ) );
+    openAction = new QAction( QIcon( ":/Sources/images/open.png" ), tr( "Open" ), this );
+    openAction->setShortcut( tr( "Ctrl+O" ) );
+    openAction->setStatusTip( tr( "Open Project" ) );
+    connect( openAction, SIGNAL( triggered() ),
+        parent(), SLOT( slotOnOpen() ) );
 
-    saveProjectAction = new QAction( QIcon( ":/Sources/images/save.png" ), tr( "Save project" ), this );
-    saveProjectAction->setShortcut( tr( "Ctrl+S" ) );
-    saveProjectAction->setStatusTip( tr( "Save Project" ) );
-    connect( saveProjectAction, SIGNAL( triggered() ),
-        parent(), SLOT( slotOnSaveProject() ) );
+    saveAction = new QAction( QIcon( ":/Sources/images/save.png" ), tr( "Save" ), this );
+    saveAction->setShortcut( tr( "Ctrl+S" ) );
+    saveAction->setStatusTip( tr( "Save Project" ) );
+    connect( saveAction, SIGNAL( triggered() ),
+        parent(), SLOT( slotOnSave() ) );
 
-    createBasedBlockAction = new QAction( QIcon( ":/Sources/images/based.png" ), tr( "Based" ), this );
-    createBasedBlockAction->setShortcut( tr( "Ctrl+Q" ) );
-    createBasedBlockAction->setStatusTip( tr( "New BasedBlock" ) );
-    connect( createBasedBlockAction, SIGNAL( triggered() ),
-        parent(), SLOT( slotCreateBasedBlock() ) );
+    createBasicBlockAction = new QAction( QIcon( ":/Sources/images/basic.png" ), tr( "Basic" ), this );
+    createBasicBlockAction->setShortcut( tr( "Ctrl+Q" ) );
+    createBasicBlockAction->setStatusTip( tr( "New BasicBlock" ) );
+    connect( createBasicBlockAction, SIGNAL( triggered() ),
+        parent(), SLOT( slotCreateBasicBlock() ) );
 
     createCompositeBlockAction = new QAction( QIcon( ":/Sources/images/composite.png" ), tr( "Composite" ), this );
     createCompositeBlockAction->setShortcut( tr( "Ctrl+W" ) );
@@ -108,13 +108,13 @@ void SMenuBar::CreateMenus()
 {
     fileMenu = addMenu( tr( "&File" ) );
     fileMenu->addAction( createNewProjectAction );
-    fileMenu->addAction( openProjectAction );
-    fileMenu->addAction( saveProjectAction );
+    fileMenu->addAction( openAction );
+    fileMenu->addAction( saveAction );
     fileMenu->addSeparator();
     fileMenu->addAction( exitAction );
 
     newItemMenu = addMenu( tr( "&Blocks" ) );
-    newItemMenu->addAction( createBasedBlockAction );
+    newItemMenu->addAction( createBasicBlockAction );
     newItemMenu->addAction( createCompositeBlockAction );
     newItemMenu->addAction( createSparqlBlockAction );
 

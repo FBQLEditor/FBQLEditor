@@ -94,9 +94,9 @@ QVector<DiagramItemSettings*> BlocksLibrary::getBlocks( int modes_blocks )
 {
     QMap<QString, QMap<QString, DiagramItemSettings*>> block_list;
     QSet<ModeBlocks> mode_list;
-    if ( ( modes_blocks & Based ) )
+    if ( ( modes_blocks & Basic ) )
     {
-        mode_list.insert( Based );
+        mode_list.insert( Basic );
     }
     if ( ( modes_blocks & Composite ) )
     {
@@ -142,8 +142,8 @@ BlocksLibrary::ModeBlocks BlocksLibrary::getMode( DiagramItemSettings* settings 
 {
     switch ( settings->typeSettings() )
     {
-    case DiagramItemSettings::BasedItemSettingsType:
-        return Based;
+    case DiagramItemSettings::BasicItemSettingsType:
+        return Basic;
         break;
     case DiagramItemSettings::CompositeItemSettingsType:
         return Composite;

@@ -16,11 +16,11 @@ void SToolBar::CreateToolBar( SMenuBar& menubar )
 
     addSeparator();
     addAction( menubar.createNewProjectAction );
-    addAction( menubar.openProjectAction );
-    addAction( menubar.saveProjectAction );
+    addAction( menubar.openAction );
+    addAction( menubar.saveAction );
 
     addSeparator();
-    addAction( menubar.createBasedBlockAction );
+    addAction( menubar.createBasicBlockAction );
     addAction( menubar.createCompositeBlockAction );
     addAction( menubar.createSparqlBlockAction );
 

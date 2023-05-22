@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "OR_DEP",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

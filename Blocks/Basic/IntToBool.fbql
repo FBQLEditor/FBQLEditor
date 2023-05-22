@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "IntToBool",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

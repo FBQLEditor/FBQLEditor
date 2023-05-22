@@ -5,7 +5,7 @@
 #include <QDebug>
 
 #include <atomblocksettings.h>
-#include <basedblockwindow.h>
+#include <basicblockwindow.h>
 #include <compositeblockwindow.h>
 #include <diagramexecutor.h>
 #include <fusekiserversetting.h>
@@ -29,8 +29,8 @@ MainWindow::MainWindow( QWidget* parent )
     library = new BlocksLibrary();
     library->loadBlocksFromFiles( FOLDER_FOR_DEFAULT_BLOCKS );
     library->loadBlocksFromFiles( FOLDER_FOR_USERS_BLOCKS );
-    library->addBlocks( AtomBlockSettings::GetBasedAtomBlocks() );
-    library->addBlocks( IOBlockSettings::GetBasedIOBlocks() );
+    library->addBlocks( AtomBlockSettings::GetBasicAtomBlocks() );
+    library->addBlocks( IOBlockSettings::GetBasicIOBlocks() );
 
     createMainForm();
     slotOnOpenMainPage();
@@ -82,16 +82,17 @@ void MainWindow::slotCreateNewProject()
     tab_widget->addWidget( window, tr( "New Project" ) );
 }
 
-void MainWindow::slotCreateBasedBlock()
+void MainWindow::slotCreateBasicBlock()
 {
-    auto window = new BasedBlockWindow( BasedBlockWindow::CreateMode, tab_widget );
-    tab_widget->addWidget( window, tr( "New Block" ) );
+    auto window = new BasicBlockWindow( BasicBlockWindow::CreateMode, tab_widget );
+    tab_widget->addWidget( window, tr( "New Basic" ) );
+    connect( window, SIGNAL( blockCreated( DiagramItemSettings* ) ), this, SLOT( slotOnCreateBlock( DiagramItemSettings* ) ) );
 }
 
 void MainWindow::slotCreateCompositeBlock()
 {
     auto window = new CompositeBlockWindow( item_menu, this );
-    tab_widget->addWidget( window, tr( "Composite Block" ) );
+    tab_widget->addWidget( window, tr( "New Composite" ) );
     connect( window, SIGNAL( blockCreated( DiagramItemSettings* ) ), this, SLOT( slotOnCreateBlock( DiagramItemSettings* ) ) );
 }
 
@@ -134,12 +135,12 @@ void MainWindow::slotOnDeleteItemOnScene()
     tab_widget->deleteItemOnScene();
 }
 
-void MainWindow::slotOnOpenProject()
+void MainWindow::slotOnOpen()
 {
     open_save_processor->openFBAndCreateWidget();
 }
 
-void MainWindow::slotOnSaveProject()
+void MainWindow::slotOnSave()
 {
     tab_widget->callSaveCurrentWidget();
 }

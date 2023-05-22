@@ -13,7 +13,7 @@ public:
     {
         SWidgetType,
         SGraphicsViewType,
-        BasedBlockWindowType,
+        BasicBlockWindowType,
         FusekiServerWindowType,
         MainPageType
     };
@@ -31,6 +31,7 @@ public slots:
     virtual void slotOnOpenButtonClicked(){};
 
 signals:
+    void blockCreated( DiagramItemSettings* );
     void setTabName( QString );
     void signalCloseWidget();
     void ERROR( QString );

@@ -14,6 +14,6 @@
     },
     "Header": {
         "Name": "EnterBool",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

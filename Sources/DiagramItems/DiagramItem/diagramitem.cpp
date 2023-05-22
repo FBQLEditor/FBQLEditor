@@ -258,7 +258,7 @@ void DiagramItem::setDependecies( QVector<QPair<DiagramItem*, DiagramItem*>> dat
 
 bool DiagramItem::CheckItemOnDiagramItem( const qint64 code )
 {
-    if ( DiagramItem::BasedItemType == code
+    if ( DiagramItem::BasicItemType == code
         || DiagramItem::CompositeItemType == code
         || DiagramItem::SparqlItemType == code
         || DiagramItem::AtomItemType == code
@@ -270,7 +270,7 @@ bool DiagramItem::CheckItemOnDiagramItem( const qint64 code )
 }
 
 #include <diagramitematom.h>
-#include <diagramitembased.h>
+#include <diagramitembasic.h>
 #include <diagramitemcomposite.h>
 #include <diagramitemio.h>
 #include <diagramitemsparql.h>
@@ -280,9 +280,9 @@ DiagramItem* DiagramItem::FactoryDiagramItem( QMenu* context_menu,
 {
     switch ( settings->typeSettings() )
     {
-    case DiagramItemSettings::BasedItemSettingsType:
-        return new DiagramItemBased( context_menu, parent,
-            new BasedBlockSettings( *static_cast<BasedBlockSettings*>( settings ) ) );
+    case DiagramItemSettings::BasicItemSettingsType:
+        return new DiagramItemBasic( context_menu, parent,
+            new BasicBlockSettings( *static_cast<BasicBlockSettings*>( settings ) ) );
         break;
     case DiagramItemSettings::CompositeItemSettingsType:
         return new DiagramItemComposite( context_menu, parent,

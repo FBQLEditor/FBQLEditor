@@ -5,7 +5,7 @@
 
 #include <compositeblocksettings.h>
 #include <diagramarrow.h>
-#include <diagramitembased.h>
+#include <diagramitembasic.h>
 #include <diagramitemio.h>
 #include <diagramitemsparql.h>
 
@@ -132,9 +132,9 @@ void DiagramExecutor::setDiagramItem( QVector<DiagramItem*>& item_list )
             for ( auto& block_set : settings->blocks )
             {
                 auto block_exec = createBlocksExecObject( block_set );
-                if ( DiagramItemSettings::BasedItemSettingsType == block_set->typeSettings() )
+                if ( DiagramItemSettings::BasicItemSettingsType == block_set->typeSettings() )
                 {
-                    block_exec->setUserData( static_cast<BasedBlockSettings*>( block_set )->line_edit_text );
+                    block_exec->setUserData( static_cast<BasicBlockSettings*>( block_set )->line_edit_text );
                 }
 
                 new_blocks.push_back( block_exec );

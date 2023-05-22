@@ -86,7 +86,7 @@ void IOBlockSettings::setType( TypeIO type )
     type_block = type;
 }
 
-QVector<DiagramItemSettings*> IOBlockSettings::GetBasedIOBlocks()
+QVector<DiagramItemSettings*> IOBlockSettings::GetBasicIOBlocks()
 {
     QVector<DiagramItemSettings*> block_list;
     IOBlockSettings* settings = new IOBlockSettings();

@@ -52,10 +52,6 @@ private slots:
     void updatePosData();
     void updatePosItems();
 
-signals:
-    void blockCreated( DiagramItemSettings* );
-    void ERROR( QString );
-
 private:
     DiagramScene* diagram_scene;
     QMenu* context_menu;

@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "EnterNumber",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

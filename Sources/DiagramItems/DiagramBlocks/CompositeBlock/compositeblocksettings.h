@@ -1,7 +1,7 @@
 #ifndef COMPOSITEBLOCKSETTINGS_H
 #define COMPOSITEBLOCKSETTINGS_H
 
-#include <basedblocksettings.h>
+#include <basicblocksettings.h>
 
 class CompositeBlockSettings : public DiagramItemSettings
 {

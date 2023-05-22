@@ -52,10 +52,10 @@ QWidget* CompositeBlockWindow::addCustomBotWidget()
     return widget;
 }
 
-void CompositeBlockWindow::slotOnCreateButtonClicked()
-{
-    emit blockCreated( getSettings() );
-}
+// void CompositeBlockWindow::slotOnCreateButtonClicked()
+//{
+//     emit blockCreated( getSettings() );
+// }
 
 void CompositeBlockWindow::slotOnSaveButtonClicked()
 {
@@ -63,7 +63,7 @@ void CompositeBlockWindow::slotOnSaveButtonClicked()
     QJsonDocument json;
     json.setObject( settings->getJsonFromSetting() );
     saveFile( json.toJson(), DiagramItemSettings::getFileFormat( DiagramItemSettings::BlockFileFormat ) );
-    delete settings;
+    emit blockCreated( settings );
 }
 
 void CompositeBlockWindow::slotOnOpenButtonClicked()

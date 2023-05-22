@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "AND_DEP",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

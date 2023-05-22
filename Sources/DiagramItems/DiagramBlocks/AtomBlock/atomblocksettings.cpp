@@ -161,7 +161,7 @@ AtomBlockSettings* AtomBlockSettings::GetValueAtomBlock()
     return settings;
 }
 
-QVector<DiagramItemSettings*> AtomBlockSettings::GetBasedAtomBlocks()
+QVector<DiagramItemSettings*> AtomBlockSettings::GetBasicAtomBlocks()
 {
     QVector<DiagramItemSettings*> list;
     list.push_back( GetVarAtomBlock() );

@@ -68,7 +68,7 @@ public:
     {
         DiagramArrowType = UserType,
         DiagramItemType = UserType + 2,
-        BasedItemType = UserType + 4,
+        BasicItemType = UserType + 4,
         CompositeItemType = UserType + 6,
         SparqlItemType = UserType + 8,
         AtomItemType = UserType + 10,

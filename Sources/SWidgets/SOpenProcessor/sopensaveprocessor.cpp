@@ -7,7 +7,7 @@
 #include <QJsonObject>
 #include <QStandardPaths>
 
-#include <basedblockwindow.h>
+#include <basicblockwindow.h>
 #include <compositeblockwindow.h>
 #include <projectwindow.h>
 #include <sparqlblockwindow.h>
@@ -35,10 +35,10 @@ void SOpenSaveProcessor::openFBAndCreateWidget()
             if ( json.isObject() )
             {
                 auto object = json.object();
-                if ( BasedBlockSettings::CheckSettings( object ) )
+                if ( BasicBlockSettings::CheckSettings( object ) )
                 {
-                    auto widget = new BasedBlockWindow( BasedBlockWindow::CreateMode, my_parent );
-                    auto settings = new BasedBlockSettings();
+                    auto widget = new BasicBlockWindow( BasicBlockWindow::CreateMode, my_parent );
+                    auto settings = new BasicBlockSettings();
                     settings->setSettingFromJson( object );
                     widget->setSettings( settings );
                     emit widgetCreate( widget, short_name );

@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "OR-NOT",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }

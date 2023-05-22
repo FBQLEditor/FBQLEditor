@@ -131,12 +131,12 @@ QString CompositeBlockSettings::getScript()
         temp += "\tfunction( x, index ) {\n";
         temp += "\t\tvar y = [];";
 
-        if ( DiagramItemSettings::BasedItemSettingsType == block->typeSettings() )
+        if ( DiagramItemSettings::BasicItemSettingsType == block->typeSettings() )
         {
-            auto based_block = static_cast<BasedBlockSettings*>( block );
-            if ( based_block->line_edit_text != "" )
+            auto basic_block = static_cast<BasicBlockSettings*>( block );
+            if ( basic_block->line_edit_text != "" )
             {
-                temp += "\t\tvar input = " + based_block->line_edit_text + ";";
+                temp += "\t\tvar input = " + basic_block->line_edit_text + ";";
             }
         }
 

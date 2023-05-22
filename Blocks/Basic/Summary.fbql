@@ -13,6 +13,6 @@
     },
     "Header": {
         "Name": "Summary",
-        "Type": "Based"
+        "Type": "Basic"
     }
 }
