@@ -52,8 +52,8 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     QGridLayout* grid_layout = new QGridLayout();
     widget->setLayout( grid_layout );
 
-    QPushButton* button_create_block = new QPushButton( "Create", this );
-    connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
+    // QPushButton* button_create_block = new QPushButton( "Create", this );
+    // connect( button_create_block, SIGNAL( clicked() ), this, SLOT( slotOnCreateButtonClicked() ) );
 
     QPushButton* button_save_block = new QPushButton( "Save", this );
     connect( button_save_block, SIGNAL( clicked() ), this, SLOT( slotOnSaveButtonClicked() ) );
@@ -65,7 +65,7 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     connect( button_write_query, SIGNAL( clicked() ), this, SLOT( slotOpenQuery() ) );
 
     grid_layout->addWidget( button_write_query, 0, 0 );
-    grid_layout->addWidget( button_create_block, 1, 0 );
+    // grid_layout->addWidget( button_create_block, 1, 0 );
     grid_layout->addWidget( button_save_block, 2, 0 );
     grid_layout->addWidget( button_open_block, 3, 0 );
 
