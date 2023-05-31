@@ -1,6 +1,7 @@
 #ifndef SPARQLBLOCKWINDOW_H
 #define SPARQLBLOCKWINDOW_H
 
+#include <QCheckBox>
 #include <QSpinBox>
 #include <QTextEdit>
 
@@ -26,6 +27,7 @@ public slots:
     void slotOnSaveButtonClicked() override;
     void slotOnOpenButtonClicked() override;
     void slotOpenQuery();
+    void slotClickCheckBoxQuery();
 
 private:
     QWidget* addCustomWidget() override;
@@ -33,6 +35,7 @@ private:
 
     QLineEdit* line_name_block;
     QSpinBox* spin_box_limit;
+    QCheckBox* box_query;
     void createDefaultcScene();
     void clearScene();
     bool CheckCollisionArea( DiagramItemAtom* item, DiagramItemAtom* area );

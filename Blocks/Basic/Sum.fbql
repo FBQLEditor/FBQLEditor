@@ -12,7 +12,7 @@
         "Text_Label": "label"
     },
     "Header": {
-        "Name": "Summary",
+        "Name": "Sum",
         "Type": "Basic"
     }
 }

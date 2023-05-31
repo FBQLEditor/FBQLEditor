@@ -35,6 +35,7 @@ public:
     QVector<AreaSaver> areas;
     int start_area;
     QString query;
+    bool use_query;
 
     void setSettingFromJson( const QJsonObject& object ) override;
     QJsonObject getJsonFromSetting() override;

@@ -37,10 +37,15 @@ QWidget* SparqlBlockWindow::addCustomWidget()
     spin_box_limit->setMinimum( 0 );
     spin_box_limit->setValue( 20 );
 
+    box_query = new QCheckBox( "Use text instead\n of a diagram", this );
+
+    connect( box_query, SIGNAL( stateChanged( int ) ), this, SLOT( slotClickCheckBoxQuery() ) );
+
     grid_layout->addWidget( label_name, 0, 0 );
     grid_layout->addWidget( line_name_block, 1, 0 );
     grid_layout->addWidget( label_limit, 2, 0 );
     grid_layout->addWidget( spin_box_limit, 3, 0 );
+    grid_layout->addWidget( box_query, 4, 0 );
     widget->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ) );
 
     return widget;
@@ -72,13 +77,21 @@ QWidget* SparqlBlockWindow::addCustomBotWidget()
     return widget;
 }
 
+void SparqlBlockWindow::slotClickCheckBoxQuery()
+{
+    query_edit->setReadOnly( !box_query->isChecked() );
+}
+
 void SparqlBlockWindow::slotOpenQuery()
 {
     if ( getStackedWidget()->currentIndex() == 0 )
     {
-        auto settings = getSettings();
-        query_edit->setText( settings->getQuery() );
-        delete settings;
+        if ( !box_query->isChecked() )
+        {
+            auto settings = getSettings();
+            query_edit->setText( settings->getQuery() );
+            delete settings;
+        }
         getStackedWidget()->setCurrentWidget( query_edit );
     }
     else
@@ -125,7 +138,19 @@ void SparqlBlockWindow::slotOnOpenButtonClicked()
 
 void SparqlBlockWindow::setSettings( SparqlBlockSettings* settings )
 {
+    spin_box_limit->setValue( settings->limit );
+    line_name_block->setText( settings->block_name );
+
+    if ( settings->use_query )
+    {
+        box_query->setChecked( true );
+        query_edit->setText( settings->query );
+        slotOpenQuery();
+        return;
+    }
+
     getScene()->clear();
+
     QVector<DiagramItemAtom*> areas_items;
     for ( const auto& area : settings->areas )
     {
@@ -155,8 +180,6 @@ void SparqlBlockWindow::setSettings( SparqlBlockSettings* settings )
             arrow->setText( line.text );
     }
 
-    spin_box_limit->setValue( settings->limit );
-    line_name_block->setText( settings->block_name );
     delete settings;
 }
 
@@ -165,6 +188,12 @@ SparqlBlockSettings* SparqlBlockWindow::getSettings()
     SparqlBlockSettings* settings = new SparqlBlockSettings();
     settings->block_name = line_name_block->text();
     settings->limit = spin_box_limit->value();
+    if ( box_query->isChecked() )
+    {
+        settings->use_query = true;
+        settings->query = query_edit->toPlainText();
+        return settings;
+    }
 
     QMap<DiagramItemAtom*, QVector<DiagramItemAtom*>> blocks_area;
     DiagramItemAtom* start_area;

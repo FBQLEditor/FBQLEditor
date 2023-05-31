@@ -10,6 +10,7 @@ SparqlBlockSettings::SparqlBlockSettings()
     block_name = "SparqlBlock";
     pixmap = image();
     limit = 20;
+    use_query = false;
 }
 
 SparqlBlockSettings::~SparqlBlockSettings()
@@ -43,6 +44,7 @@ void SparqlBlockSettings::setSettingFromJson( const QJsonObject& object )
         start_area = body["Start_Area"].toInt();
         pos = pointFromJsonObject( body["Pos"] );
         query = body["Query"].toString();
+        use_query = body["Use_Query"].toBool();
 
         QJsonArray areas_array = body["Areas"].toArray();
         for ( const QJsonValue& area : areas_array )
@@ -107,6 +109,7 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
     body.insert( "Start_Area", start_area );
     body.insert( "Pos", jsonFromPointF( pos ) );
     body.insert( "Query", query );
+    body.insert( "Use_Query", use_query );
 
     body.insert( "Lines", getJsonArrayFromLineSaver( lines ) );
 
@@ -135,6 +138,9 @@ QJsonObject SparqlBlockSettings::getJsonFromSetting()
 
 QString SparqlBlockSettings::getQuery()
 {
+    if ( use_query )
+        return query;
+
     QString request;
     MainSettingsMaster master( "SPARQL" );
     auto prefixes = master.getSettings<QStringList>( "prefixes" );

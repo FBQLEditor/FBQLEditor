@@ -1,0 +1,19 @@
+{
+    "Body": {
+        "Flag_Custom_Image": false,
+        "Flag_Edit": false,
+        "Flag_Label": false,
+        "Image": "",
+        "Pos": {
+            "X": 0,
+            "Y": 0
+        },
+        "Script": "if( inputs.length < 2 )\n{\n\toutput = false;\n}\nelse\n{\n\toutput = true;\n\tfor ( var i = 0; i < ( inputs.length - 1); i++ )\n\t{\n\t\tif (  inputs[i] != inputs[i + 1] )\n\t\t{\n\t\t\toutput = false;\n\t\t\tbreak;\n\t\t}\n\t}\n}",
+        "Text_Edit": "",
+        "Text_Label": "label"
+    },
+    "Header": {
+        "Name": "EQ",
+        "Type": "Basic"
+    }
+}
