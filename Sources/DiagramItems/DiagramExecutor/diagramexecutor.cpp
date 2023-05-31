@@ -9,11 +9,10 @@
 #include <diagramitemio.h>
 #include <diagramitemsparql.h>
 
-#include <graphviz/cgraph.h>
-#include <graphviz/gvc.h>
-
 #ifdef Q_OS_LINUX
 #define FUSEKI_SERVER_PATH "FusekiServer/fuseki-server"
+#include <graphviz/cgraph.h>
+#include <graphviz/gvc.h>
 #else
 #define FUSEKI_SERVER_PATH "FusekiServer/fuseki-server.bat"
 #endif
@@ -252,6 +251,7 @@ void DiagramExecutor::setDiagramItem( QVector<DiagramItem*>& item_list )
 
 void DiagramExecutor::paint()
 {
+#ifdef Q_OS_LINUX
     QString text_format = "digraph graph_blocks\n"
                           "{\n"
                           "\tfontname=\"Helvetica,Arial,sans-serif\"\n"
@@ -263,15 +263,15 @@ void DiagramExecutor::paint()
     for ( int i = 0; i < blocks_exec_list.size(); ++i )
     {
         text_format += "\t" + QString::number( i ) + " "
-            + "[label=\""
-            + blocks_exec_list[i]->getSettings()->getNameType() + "\\n\\n\\n"
-            + blocks_exec_list[i]->getSettings()->block_name + "\\n|"
-            + "{input:|output:|user data:|in/out}|{{[]}|{"
-            + ( ( "SPARQL" != blocks_exec_list[i]->getSettings()->getNameType() ) ? blocks_exec_list[i]->getOutputData().toString() : "" )
-            + "}|{"
-            + blocks_exec_list[i]->getUserData() + "}|{"
-            + QString::number( blocks_exec_list[i]->getPrevBlocks().size() ) + " / "
-            + QString::number( blocks_exec_list[i]->getNextBlocks().size() ) + "}}\"]\n";
+                       + "[label=\""
+                       + blocks_exec_list[i]->getSettings()->getNameType() + "\\n\\n\\n"
+                       + blocks_exec_list[i]->getSettings()->block_name + "\\n|"
+                       + "{input:|output:|user data:|in/out}|{{[]}|{"
+                       + ( ( "SPARQL" != blocks_exec_list[i]->getSettings()->getNameType() ) ? blocks_exec_list[i]->getOutputData().toString() : "" )
+                       + "}|{"
+                       + blocks_exec_list[i]->getUserData() + "}|{"
+                       + QString::number( blocks_exec_list[i]->getPrevBlocks().size() ) + " / "
+                       + QString::number( blocks_exec_list[i]->getNextBlocks().size() ) + "}}\"]\n";
     }
     text_format += "\n\n";
     for ( int i = 0; i < blocks_exec_list.size(); ++i )
@@ -283,6 +283,7 @@ void DiagramExecutor::paint()
     }
     text_format += "}";
 
+
     GVC_t* gvc;
     gvc = gvContext();
 
@@ -292,7 +293,7 @@ void DiagramExecutor::paint()
     char* png_bytes;
     unsigned int size_png_bytes;
 
-#ifdef Q_OS_LINUX
+
     if ( path.isEmpty() )
     {
         auto time = QString::number( QDateTime::currentMSecsSinceEpoch() );
@@ -301,7 +302,6 @@ void DiagramExecutor::paint()
     }
     QString file_name = QDir( path + QString::number( QDateTime::currentMSecsSinceEpoch() ) + ".png" ).absolutePath();
     gvRender( gvc, graph, "png", fopen( file_name.toStdString().c_str(), "w" ) );
-#endif
 
     gvRenderData( gvc, graph, "png", &png_bytes, &size_png_bytes );
 
@@ -316,6 +316,7 @@ void DiagramExecutor::paint()
     pixmap.loadFromData( byte_array_png, "PNG" );
     // pixmap = pixmap.scaled( 800, 600 );
     label_pixmap->setPixmap( pixmap );
+#endif
 }
 
 void DiagramExecutor::createWindow()
