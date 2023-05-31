@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "FBQL Editor"
-#define MyAppVersion "0.7"
+#define MyAppVersion "0.8"
 #define MyAppExeName "SPARQL.exe"
 #define MyAppPublisher "FBQL Editor"
 #define MyAppURL "https://github.com/FBQLEditor/FBQLEditor"
