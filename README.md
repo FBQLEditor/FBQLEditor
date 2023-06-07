@@ -1,5 +1,5 @@
-# Functional Blocks Query Language Editor
-For the program version 0.6
+# Function Blocks Query Language Editor
+For the program version 0.8
 
 # Download
 [FBQL Editor (Windows 10 x64) - 57Mb](https://github.com/FBQLEditor/FBQLEditor/raw/main/Executable/latest/FBQL%20Editor%20Setup.exe)
